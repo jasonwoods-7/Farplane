@@ -1,4 +1,4 @@
-namespace Farplane.FFX2.Values;
+﻿namespace Farplane.FFX2.Values;
 
 public static class GarmentGrids
 {
@@ -25,7 +25,7 @@ public static class GarmentGrids
         new GarmentGrid {ID = 18, Name = "Restless Sleep"},
         new GarmentGrid {ID = 19, Name = "Still of Night"},
         new GarmentGrid {ID = 20, Name = "Mortal Coil"},
-        new GarmentGrid {ID = 21, Name = "Racing Giant"},
+        new GarmentGrid {ID = 21, Name = "Raging Giant"},
         new GarmentGrid {ID = 22, Name = "Bitter Farewell"},
         new GarmentGrid {ID = 23, Name = "Selene Guard"},
         new GarmentGrid {ID = 24, Name = "Helios Guard"},
