@@ -260,7 +260,7 @@ public partial class EquipmentPanel : UserControl
             }
         }
 
-        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>("AbilityCount");
+        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.AbilityCount));
         GameMemory.Write(offset, (byte)newSlots, false);
 
         this.RefreshSelectedItem();
@@ -353,7 +353,7 @@ public partial class EquipmentPanel : UserControl
             return;
         }
 
-        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>("Character");
+        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Character));
         GameMemory.Write(offset, (byte)this.ComboEquipmentCharacter.SelectedIndex, false);
 
         this.RefreshSelectedItem();
@@ -366,7 +366,7 @@ public partial class EquipmentPanel : UserControl
             return;
         }
 
-        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>("Type");
+        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Type));
         GameMemory.Write(offset, (byte)this.ComboEquipmentType.SelectedIndex, false);
 
         this.RefreshSelectedItem();
@@ -401,7 +401,7 @@ public partial class EquipmentPanel : UserControl
         var searchIndex = searchDialog.ResultIndex;
         var searchItem = EquipAppearance.EquipAppearances[searchIndex];
 
-        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>("Appearance");
+        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Appearance));
         GameMemory.Write(offset, (ushort)searchItem.ID, false);
 
         this.RefreshSelectedItem();

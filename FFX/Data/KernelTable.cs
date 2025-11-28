@@ -8,8 +8,8 @@ namespace Farplane.FFX.Data;
 
 public class KernelTable
 {
-    static readonly int stringOffset1 = (int)Marshal.OffsetOf<KernelBlockHeader>("StringOffset1");
-    static readonly int stringOffset2 = (int)Marshal.OffsetOf<KernelBlockHeader>("StringOffset2");
+    static readonly int stringOffset1 = (int)Marshal.OffsetOf<KernelBlockHeader>(nameof(KernelBlockHeader.StringOffset1));
+    static readonly int stringOffset2 = (int)Marshal.OffsetOf<KernelBlockHeader>(nameof(KernelBlockHeader.StringOffset2));
 
     readonly byte[] _stringTable;
     readonly byte[] _dataBlock;

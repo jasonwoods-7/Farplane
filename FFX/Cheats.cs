@@ -24,23 +24,23 @@ static class Cheats
             var characterOffset = partyOffset + (0x94 * i);
             var overdriveLevel = i > 7 ? 20 : 100;
 
-            Party.SetPartyMemberAttribute<uint>(i, "CurrentHp", 99999);
-            Party.SetPartyMemberAttribute<uint>(i, "MaxHp", 99999);
-            Party.SetPartyMemberAttribute<uint>(i, "BaseHp", 99999);
-            Party.SetPartyMemberAttribute<uint>(i, "CurrentMp", 9999);
-            Party.SetPartyMemberAttribute<uint>(i, "MaxMp", 9999);
-            Party.SetPartyMemberAttribute<uint>(i, "BaseMp", 9999);
+            Party.SetPartyMemberAttribute<uint>(i, nameof(PartyMember.CurrentHp), 99999);
+            Party.SetPartyMemberAttribute<uint>(i, nameof(PartyMember.CurrentHpMax), 99999);
+            Party.SetPartyMemberAttribute<uint>(i, nameof(PartyMember.BaseHp), 99999);
+            Party.SetPartyMemberAttribute<uint>(i, nameof(PartyMember.CurrentMp), 9999);
+            Party.SetPartyMemberAttribute<uint>(i, nameof(PartyMember.CurrentMpMax), 9999);
+            Party.SetPartyMemberAttribute<uint>(i, nameof(PartyMember.BaseMp), 9999);
 
-            Party.SetPartyMemberAttribute<byte>(i, "BaseStrength", 255);
-            Party.SetPartyMemberAttribute<byte>(i, "BaseDefense", 255);
-            Party.SetPartyMemberAttribute<byte>(i, "BaseMagic", 255);
-            Party.SetPartyMemberAttribute<byte>(i, "BaseMagicDefense", 255);
-            Party.SetPartyMemberAttribute<byte>(i, "BaseAgility", 255);
-            Party.SetPartyMemberAttribute<byte>(i, "BaseLuck", 255);
-            Party.SetPartyMemberAttribute<byte>(i, "BaseEvasion", 255);
-            Party.SetPartyMemberAttribute<byte>(i, "BaseAccuracy", 255);
-            Party.SetPartyMemberAttribute(i, "OverdriveLevel", (byte)overdriveLevel);
-            Party.SetPartyMemberAttribute(i, "OverdriveMax", (byte)overdriveLevel);
+            Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseStrength), 255);
+            Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseDefense), 255);
+            Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseMagic), 255);
+            Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseMagicDefense), 255);
+            Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseAgility), 255);
+            Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseLuck), 255);
+            Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseEvasion), 255);
+            Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseAccuracy), 255);
+            Party.SetPartyMemberAttribute(i, nameof(PartyMember.OverdriveLevel), (byte)overdriveLevel);
+            Party.SetPartyMemberAttribute(i, nameof(PartyMember.OverdriveMax), (byte)overdriveLevel);
         }
     }
 
@@ -50,7 +50,7 @@ static class Cheats
         for (var i = 0; i < 8; i++)
         {
             var characterOffset = partyOffset + (0x94 * i);
-            LegacyMemoryReader.WriteByte(StructHelper.GetFieldOffset<PartyMember>("SphereLevelCurrent", characterOffset), 255);
+            LegacyMemoryReader.WriteByte(StructHelper.GetFieldOffset<PartyMember>(nameof(PartyMember.SphereLevelCurrent), characterOffset), 255);
         }
     }
 
@@ -60,8 +60,8 @@ static class Cheats
         for (var i = 0; i < 18; i++)
         {
 
-            var characterAbilityOffset = partyOffset + (Marshal.SizeOf<PartyMember>() * i) + StructHelper.GetFieldOffset<PartyMember>("SkillFlags");
-            ;
+            var characterAbilityOffset = partyOffset + (Marshal.SizeOf<PartyMember>() * i) + StructHelper.GetFieldOffset<PartyMember>(nameof(PartyMember.SkillFlags));
+
             var currentAbilities = LegacyMemoryReader.ReadBytes(characterAbilityOffset, 13);
 
             // Flip all normal ability bits

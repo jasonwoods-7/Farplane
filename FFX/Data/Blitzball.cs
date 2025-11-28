@@ -16,7 +16,7 @@ public static class Blitzball
 
     public static BlitzballData ReadBlitzballData(bool dumpBytes = false)
     {
-        var offsetOfPrizes = (int)Marshal.OffsetOf<BlitzballData>("BlitzballPrizes");
+        var offsetOfPrizes = (int)Marshal.OffsetOf<BlitzballData>(nameof(BlitzballData.BlitzballPrizes));
         var blitzBytes = GameMemory.Read<byte>(_dataPointer, _blitzDataSize, false);
 
         if (dumpBytes)

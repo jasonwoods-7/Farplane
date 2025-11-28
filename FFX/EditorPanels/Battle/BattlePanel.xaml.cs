@@ -249,76 +249,76 @@ public partial class BattlePanel : UserControl
             {
                 case "TextCurrentHP":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "hp_current", BitConverter.GetBytes(int.Parse(senderBox.Text)));
+                        nameof(BattleEntityData.hp_current), BitConverter.GetBytes(int.Parse(senderBox.Text)));
                     break;
                 case "TextCurrentMP":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "mp_current", BitConverter.GetBytes(int.Parse(senderBox.Text)));
+                        nameof(BattleEntityData.mp_current), BitConverter.GetBytes(int.Parse(senderBox.Text)));
                     break;
                 case "TextMaxHP":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "hp_max", BitConverter.GetBytes(int.Parse(senderBox.Text)));
+                        nameof(BattleEntityData.hp_max), BitConverter.GetBytes(int.Parse(senderBox.Text)));
                     break;
 
                 case "TextMaxMP":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "mp_max", BitConverter.GetBytes(int.Parse(senderBox.Text)));
+                        nameof(BattleEntityData.mp_max), BitConverter.GetBytes(int.Parse(senderBox.Text)));
                     break;
                 case "TextOverdrive":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "overdrive_current", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.overdrive_current), byte.Parse(senderBox.Text));
                     break;
                 case "TextOverdriveMax":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "overdrive_max", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.overdrive_max), byte.Parse(senderBox.Text));
                     break;
                 case "TextStrength":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "strength", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.strength), byte.Parse(senderBox.Text));
                     break;
                 case "TextDefense":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "defense", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.defense), byte.Parse(senderBox.Text));
                     break;
                 case "TextMagic":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "magic", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.magic), byte.Parse(senderBox.Text));
                     break;
                 case "TextMagicDefense":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "magic_defense", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.magic_defense), byte.Parse(senderBox.Text));
                     break;
                 case "TextAgility":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "agility", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.agility), byte.Parse(senderBox.Text));
                     break;
                 case "TextLuck":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "luck", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.luck), byte.Parse(senderBox.Text));
                     break;
                 case "TextEvasion":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "evasion", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.evasion), byte.Parse(senderBox.Text));
                     break;
                 case "TextAccuracy":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "accuracy", byte.Parse(senderBox.Text));
+                        nameof(BattleEntityData.accuracy), byte.Parse(senderBox.Text));
                     break;
                 case "TextDoom":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "timer_doom", byte.Parse(this.TextDoom.Text));
+                        nameof(BattleEntityData.timer_doom), byte.Parse(this.TextDoom.Text));
                     break;
                 case "TextSilence":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "status_turns_silence", byte.Parse(this.TextSilence.Text));
+                        nameof(BattleEntityData.status_turns_silence), byte.Parse(this.TextSilence.Text));
                     break;
                 case "TextDarkness":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "status_turns_darkness", byte.Parse(this.TextDarkness.Text));
+                        nameof(BattleEntityData.status_turns_darkness), byte.Parse(this.TextDarkness.Text));
                     break;
                 case "TextSleep":
                     BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        "status_turns_sleep", byte.Parse(this.TextSleep.Text));
+                        nameof(BattleEntityData.status_turns_sleep), byte.Parse(this.TextSleep.Text));
                     break;
             }
         }

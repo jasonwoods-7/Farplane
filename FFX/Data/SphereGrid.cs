@@ -175,14 +175,14 @@ public class SphereGrid
     public static void SetNodeType(int nodeIndex, int nodeType)
     {
         var nodeOffset = _offsetSphereGrid + 0x818 + (nodeIndex * _sizeSphereGridNode);
-        var dataOffset = Marshal.OffsetOf<SphereGridNode>("NodeType");
+        var dataOffset = Marshal.OffsetOf<SphereGridNode>(nameof(SphereGridNode.NodeType));
         GameMemory.Write((int)(dataOffset + nodeOffset), (ushort)nodeType, false);
     }
 
     public static void SetNodeActivation(int nodeIndex, byte nodeActivation)
     {
         var nodeOffset = _offsetSphereGrid + 0x818 + (nodeIndex * _sizeSphereGridNode);
-        var dataOffset = Marshal.OffsetOf<SphereGridNode>("ActivatedBy");
+        var dataOffset = Marshal.OffsetOf<SphereGridNode>(nameof(SphereGridNode.ActivatedBy));
         GameMemory.Write((int)(dataOffset + nodeOffset), nodeActivation, false);
     }
 }

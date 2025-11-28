@@ -126,7 +126,7 @@ public static class Party
 
     public static void ToggleSkillFlag(int partyIndex, int skillFlag)
     {
-        var offset = _offsetParty + (partyIndex * _blockLength) + (int)Marshal.OffsetOf<PartyMember>("SkillFlags");
+        var offset = _offsetParty + (partyIndex * _blockLength) + (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.SkillFlags));
         var byteIndex = skillFlag / 8;
         var bitIndex = skillFlag % 8;
 

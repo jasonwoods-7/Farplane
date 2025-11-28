@@ -129,39 +129,39 @@ public class FFXHardBattleMod : IFarplaneMod
                     newEvasion = newEvasion > byte.MaxValue ? byte.MaxValue : newEvasion;
 
                     // update entity values
-                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("hp_current"),
+                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.hp_current)),
                         newHP, false);
 
-                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("hp_max"),
+                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.hp_max)),
                         newHP, false);
 
-                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("hp_max2"),
+                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.hp_max2)),
                         newHP, false);
 
-                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("mp_current"),
+                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.mp_current)),
                         newMP, false);
 
-                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("mp_max"),
+                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.mp_max)),
                         newMP, false);
 
-                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("mp_max2"),
+                    GameMemory.Write<int>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.mp_max2)),
                         newMP, false);
 
-                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("strength"),
+                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.strength)),
                         (byte)newStrength, false);
-                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("defense"),
+                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.defense)),
                         (byte)newDefense, false);
-                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("magic"),
+                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.magic)),
                         (byte)newMagic, false);
-                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("magic_defense"),
+                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.magic_defense)),
                         (byte)newMagicDef, false);
-                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("agility"),
+                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.agility)),
                         (byte)newAgility, false);
-                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("luck"),
+                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.luck)),
                         (byte)newLuck, false);
-                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("accuracy"),
+                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.accuracy)),
                         (byte)newAccuracy, false);
-                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>("evasion"),
+                    GameMemory.Write<byte>(entityOffset + StructHelper.GetFieldOffset<BattleEntityData>(nameof(BattleEntityData.evasion)),
                         (byte)newEvasion, false);
 
                     changedCreature[i] = true;

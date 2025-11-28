@@ -37,7 +37,7 @@ public class OverdriveMode
 
     public static void ToggleOverdriveMode(int charIndex, int overdriveId)
     {
-        var odOffset = StructHelper.GetFieldOffset<PartyMember>("OverdriveModes",
+        var odOffset = StructHelper.GetFieldOffset<PartyMember>(nameof(PartyMember.OverdriveModes),
             _offsetParty + (Marshal.SizeOf<PartyMember>() * charIndex));
         var odBytes = GameMemory.Read<byte>(odOffset, 3, false);
 
@@ -53,7 +53,7 @@ public class OverdriveMode
 
     public static void SetOverdriveCounter(int charIndex, int odIndex, int odCount)
     {
-        var odOffset = StructHelper.GetFieldOffset<PartyMember>("OverdriveWarrior",
+        var odOffset = StructHelper.GetFieldOffset<PartyMember>(nameof(PartyMember.OverdriveWarrior),
             _offsetParty + (Marshal.SizeOf<PartyMember>() * charIndex) + (OverdriveModes[odIndex].BitIndex * 2));
         GameMemory.Write(odOffset, BitConverter.GetBytes((ushort)odCount), false);
     }

@@ -44,7 +44,7 @@ public partial class AeonStats : UserControl
     {
         var partyMember = Party.ReadPartyMember(this._characterIndex);
         this.TextOverdrive.Text = partyMember.OverdriveMax.ToString();
-        Party.SetPartyMemberAttribute(this._characterIndex, "OverdriveLevel", partyMember.OverdriveMax);
+        Party.SetPartyMemberAttribute(this._characterIndex, nameof(PartyMember.OverdriveLevel), partyMember.OverdriveMax);
         this.Refresh(this._characterIndex);
     }
 
@@ -63,52 +63,52 @@ public partial class AeonStats : UserControl
             {
 
                 case "TextOverdrive":
-                    Party.SetPartyMemberAttribute(this._characterIndex, "OverdriveLevel", byte.Parse(this.TextOverdrive.Text));
+                    Party.SetPartyMemberAttribute(this._characterIndex, nameof(PartyMember.OverdriveLevel), byte.Parse(this.TextOverdrive.Text));
                     break;
                 case "TextOverdriveMax":
-                    Party.SetPartyMemberAttribute(this._characterIndex, "OverdriveMax", byte.Parse(this.TextOverdriveMax.Text));
+                    Party.SetPartyMemberAttribute(this._characterIndex, nameof(PartyMember.OverdriveMax), byte.Parse(this.TextOverdriveMax.Text));
                     break;
                 case "TextAeonName":
                     AeonName.SetName(this._characterIndex, this.TextAeonName.Text);
                     break;
                 case "TextBaseHP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseHp") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseHp)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, uint.Parse(this.TextBaseHP.Text), false);
                     break;
                 case "TextBaseMP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseMp") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMp)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, uint.Parse(this.TextBaseMP.Text), false);
                     break;
                 case "TextBaseStrength":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseStrength") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseStrength)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, byte.Parse(this.TextBaseStrength.Text), false);
                     break;
                 case "TextBaseDefense":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseDefense") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseDefense)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, byte.Parse(this.TextBaseDefense.Text), false);
                     break;
                 case "TextBaseMagic":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseMagic") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMagic)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, byte.Parse(this.TextBaseMagic.Text), false);
                     break;
                 case "TextBaseMagicDef":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseMagicDefense") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMagicDefense)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, byte.Parse(this.TextBaseMagicDef.Text), false);
                     break;
                 case "TextBaseAgility":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseAgility") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseAgility)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, byte.Parse(this.TextBaseAgility.Text), false);
                     break;
                 case "TextBaseLuck":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseLuck") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseLuck)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, byte.Parse(this.TextBaseLuck.Text), false);
                     break;
                 case "TextBaseEvasion":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseEvasion") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseEvasion)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, byte.Parse(this.TextBaseEvasion.Text), false);
                     break;
                 case "TextBaseAccuracy":
-                    offset = (int)Marshal.OffsetOf<PartyMember>("BaseAccuracy") + Party.GetMemoryOffset(this._characterIndex);
+                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseAccuracy)) + Party.GetMemoryOffset(this._characterIndex);
                     GameMemory.Write(offset, byte.Parse(this.TextBaseAccuracy.Text), false);
                     break;
             }

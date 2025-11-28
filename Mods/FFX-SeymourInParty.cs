@@ -22,7 +22,7 @@ public class SeymourMod : IFarplaneMod
     private static int _offsetPartyList = Offsets.GetOffset(OffsetType.PartyList);
 
     private static int offsetSeymourData = Offsets.GetOffset(OffsetType.PartyStatsBase) + 7 * StructHelper.GetSize<PartyMember>();
-    private static int offsetInParty = StructHelper.GetFieldOffset<PartyMember>("InParty");
+    private static int offsetInParty = StructHelper.GetFieldOffset<PartyMember>(nameof(PartyMember.InParty));
     private static int offsetSeymourInParty = offsetSeymourData + offsetInParty;
     private static int updateTicks = 0;
 

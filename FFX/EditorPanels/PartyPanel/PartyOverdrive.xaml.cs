@@ -89,12 +89,12 @@ public partial class PartyOverdrive : UserControl
             switch (textBox.Name)
             {
                 case "TextOverdriveCurrent":
-                    writeOffset += (int)Marshal.OffsetOf<PartyMember>("OverdriveLevel");
+                    writeOffset += (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveLevel));
                     GameMemory.Write(writeOffset, byte.Parse(this.TextOverdriveCurrent.Text), false);
                     this.TextOverdriveCurrent.SelectAll();
                     break;
                 case "TextOverdriveMax":
-                    writeOffset += (int)Marshal.OffsetOf<PartyMember>("OverdriveMax");
+                    writeOffset += (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMax));
                     GameMemory.Write(writeOffset, byte.Parse(this.TextOverdriveMax.Text), false);
                     this.TextOverdriveMax.SelectAll();
                     break;
@@ -173,9 +173,9 @@ public partial class PartyOverdrive : UserControl
 
         var charOffset = this._offsetPartyStats + (this._characterIndex * this._sizePartyMember);
 
-        var offsetLevels = (int)Marshal.OffsetOf<PartyMember>("OverdriveMode") + charOffset;
-        var offsetFlags = (int)Marshal.OffsetOf<PartyMember>("OverdriveModes") + charOffset;
-        var offsetCounters = (int)Marshal.OffsetOf<PartyMember>("OverdriveWarrior") + charOffset;
+        var offsetLevels = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMode)) + charOffset;
+        var offsetFlags = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveModes)) + charOffset;
+        var offsetCounters = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveWarrior)) + charOffset;
 
         var odLevels = GameMemory.Read<byte>(offsetLevels, 3, false);
         var odBytes = GameMemory.Read<byte>(offsetFlags, 3, false);
@@ -212,7 +212,7 @@ public partial class PartyOverdrive : UserControl
     void ButtonMax_Click(object sender, RoutedEventArgs e)
     {
         var charOffset = this._offsetPartyStats + (this._characterIndex * this._sizePartyMember);
-        var levelOffset = (int)Marshal.OffsetOf<PartyMember>("OverdriveLevel") + charOffset;
+        var levelOffset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveLevel)) + charOffset;
         var currentMax = GameMemory.Read<byte>(levelOffset, 2, false);
         GameMemory.Write(levelOffset, currentMax[1], false);
         this.Refresh(this._characterIndex);
@@ -226,7 +226,7 @@ public partial class PartyOverdrive : UserControl
         }
 
         var charOffset = this._offsetPartyStats + (this._characterIndex * this._sizePartyMember);
-        var offset = (int)Marshal.OffsetOf<PartyMember>("OverdriveMode") + charOffset;
+        var offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMode)) + charOffset;
         GameMemory.Write(offset, (byte)OverdriveMode.OverdriveModes[this.ComboCurrentOverdrive.SelectedIndex].BitIndex, false);
     }
 }
