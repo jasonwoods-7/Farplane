@@ -9,8 +9,5 @@ public partial class BlitzballMatchPanel : UserControl
 {
     public BlitzballMatchPanel() => this.InitializeComponent();
 
-    public void Refresh()
-    {
-
-    }
+    public void Refresh() { }
 }

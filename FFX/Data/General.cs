@@ -9,7 +9,9 @@ public class General
 {
     const string DumpFolder = "dump";
     static readonly int _offsetCurrentGil = OffsetScanner.GetOffset(GameOffset.FFX_CurrentGil);
-    static readonly int _offsetTidusOverdrive = OffsetScanner.GetOffset(GameOffset.FFX_TidusOverdrive);
+    static readonly int _offsetTidusOverdrive = OffsetScanner.GetOffset(
+        GameOffset.FFX_TidusOverdrive
+    );
 
     public static int CurrentGil
     {
@@ -54,9 +56,11 @@ public class General
         {
             foreach (var field in typeof(T).GetFields())
             {
-                File.AppendAllText(structFile, $"{field.Name} {Marshal.OffsetOf<T>(field.Name).ToString("X4")}{Environment.NewLine}");
+                File.AppendAllText(
+                    structFile,
+                    $"{field.Name} {Marshal.OffsetOf<T>(field.Name).ToString("X4")}{Environment.NewLine}"
+                );
             }
         }
-
     }
 }

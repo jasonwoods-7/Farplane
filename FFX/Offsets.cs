@@ -6,28 +6,28 @@ public static class Offsets
 {
     static readonly Dictionary<OffsetType, int> _offsetList = new()
     {
-        {OffsetType.EquipmentBase, 0xD30F2C}, //
-        {OffsetType.PartyStatsBase, 0xD32060}, //
-        {OffsetType.ItemTypes, 0xD3095C}, //
-        {OffsetType.ItemCounts, 0xD30B5C}, //
-        {OffsetType.DebugFlags, 0xD2A8F8}, //
-        {OffsetType.PartyInBattleFlags, 0x1F10EA0}, //
-        {OffsetType.PartyGainedApFlags, 0x1F10EC4}, //
-        {OffsetType.AeonNames, 0xD32E7C}, //
-        {OffsetType.KeyItems, 0xD30F1C}, //
-        {OffsetType.AlBhed, 0xD307A0}, //
-        {OffsetType.SphereGridNodes, 0x12AE078}, //
-        {OffsetType.SphereGridCursor, 0x12BEB6C}, //
-        {OffsetType.CurrentGil, 0xD307D8}, //
-        {OffsetType.BattleEnemyPointer, 0xD34460}, //
-        {OffsetType.BattlePlayerPointer, 0xD334CC}, //
-        {OffsetType.MonsterArena, 0xD30C9C}, //
-        {OffsetType.BlitzballDataPointer, 0x384670}, //
-        {OffsetType.BlitzballGamePointer, 0xF2FF14}, //
-        {OffsetType.BlitzballTeamSizes, 0xD2d704}, //
-        {OffsetType.TidusOverdrive, 0xD3083C}, //
-        {OffsetType.PartyList, 0xD307E8}, //
-        {OffsetType.CurrentRoom, 0xD2CA90} // 18D = Show Shuyin Sphere
+        { OffsetType.EquipmentBase, 0xD30F2C }, //
+        { OffsetType.PartyStatsBase, 0xD32060 }, //
+        { OffsetType.ItemTypes, 0xD3095C }, //
+        { OffsetType.ItemCounts, 0xD30B5C }, //
+        { OffsetType.DebugFlags, 0xD2A8F8 }, //
+        { OffsetType.PartyInBattleFlags, 0x1F10EA0 }, //
+        { OffsetType.PartyGainedApFlags, 0x1F10EC4 }, //
+        { OffsetType.AeonNames, 0xD32E7C }, //
+        { OffsetType.KeyItems, 0xD30F1C }, //
+        { OffsetType.AlBhed, 0xD307A0 }, //
+        { OffsetType.SphereGridNodes, 0x12AE078 }, //
+        { OffsetType.SphereGridCursor, 0x12BEB6C }, //
+        { OffsetType.CurrentGil, 0xD307D8 }, //
+        { OffsetType.BattleEnemyPointer, 0xD34460 }, //
+        { OffsetType.BattlePlayerPointer, 0xD334CC }, //
+        { OffsetType.MonsterArena, 0xD30C9C }, //
+        { OffsetType.BlitzballDataPointer, 0x384670 }, //
+        { OffsetType.BlitzballGamePointer, 0xF2FF14 }, //
+        { OffsetType.BlitzballTeamSizes, 0xD2d704 }, //
+        { OffsetType.TidusOverdrive, 0xD3083C }, //
+        { OffsetType.PartyList, 0xD307E8 }, //
+        { OffsetType.CurrentRoom, 0xD2CA90 }, // 18D = Show Shuyin Sphere
     };
 
     public static int GetOffset(OffsetType offsetType)
@@ -79,7 +79,7 @@ public enum EquipmentOffset
     Ability0 = 0xE,
     Ability1 = 0x10,
     Ability2 = 0x12,
-    Ability3 = 0x14
+    Ability3 = 0x14,
 }
 
 public enum BlitzballDataOffset
@@ -138,7 +138,7 @@ public enum DebugFlags
     Unknown20,
     Unknown21,
     BattleBehaviour,
-    Count // always last
+    Count, // always last
 }
 
 public enum BlockLength
@@ -147,5 +147,5 @@ public enum BlockLength
     BattleEntity = 0xF90,
     MonsterArenaCount = 0x8B,
     EquipmentItem = 0x16,
-    SkillFlags = 0xD
+    SkillFlags = 0xD,
 }

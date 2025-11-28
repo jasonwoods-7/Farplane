@@ -8,6 +8,7 @@ namespace Farplane.FFX.EditorPanels.SphereGridPanel;
 public partial class SphereGridPanel : UserControl
 {
     readonly SphereGridEditor _sphereGridEditor = new();
+
     public SphereGridPanel()
     {
         this.InitializeComponent();

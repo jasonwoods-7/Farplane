@@ -19,7 +19,11 @@ public partial class DebugPanel : UserControl
 
     public void Refresh()
     {
-        var array = GameMemory.Read<byte>(this._debugOffset, (int)DebugFlags.Count + 1, isRelative: false);
+        var array = GameMemory.Read<byte>(
+            this._debugOffset,
+            (int)DebugFlags.Count + 1,
+            isRelative: false
+        );
         var names = Enum.GetNames(typeof(DebugFlags));
         var values = Enum.GetValues(typeof(DebugFlags));
         this.known = [];
@@ -37,7 +41,10 @@ public partial class DebugPanel : UserControl
         }
         for (var j = 0; j < this.known.Count; j++)
         {
-            if (this.StackDebugOptions.Children.OfType<CheckBox>().ElementAtOrDefault(j) is { } checkBox)
+            if (
+                this.StackDebugOptions.Children.OfType<CheckBox>().ElementAtOrDefault(j) is
+                { } checkBox
+            )
             {
                 checkBox.IsChecked = array[this.known[j]] != 0;
             }
@@ -55,18 +62,30 @@ public partial class DebugPanel : UserControl
     {
         for (var i = 0; i < this.known.Count; i++)
         {
-            GameMemory.Write(this._debugOffset + this.known[i], (byte)((this.StackDebugOptions.Children[i] as CheckBox).IsChecked.Value ? 1 : 0), isRelative: false);
+            GameMemory.Write(
+                this._debugOffset + this.known[i],
+                (byte)((this.StackDebugOptions.Children[i] as CheckBox).IsChecked.Value ? 1 : 0),
+                isRelative: false
+            );
         }
         for (var j = 0; j < this.unknown.Count; j++)
         {
-            GameMemory.Write(this._debugOffset + this.unknown[j], (byte)((this.StackUnknown.Children[j] as CheckBox).IsChecked.Value ? 1 : 0), isRelative: false);
+            GameMemory.Write(
+                this._debugOffset + this.unknown[j],
+                (byte)((this.StackUnknown.Children[j] as CheckBox).IsChecked.Value ? 1 : 0),
+                isRelative: false
+            );
         }
         this.Refresh();
     }
 
     void CheckShowUnknownFlags_OnChecked(object sender, RoutedEventArgs e)
     {
-        this.StackUnknown.Visibility = (!this.CheckShowUnknownFlags.IsChecked.Value) ? Visibility.Hidden : Visibility.Visible;
-        this.TextUnknownWarning.Visibility = (!this.CheckShowUnknownFlags.IsChecked.Value) ? Visibility.Collapsed : Visibility.Visible;
+        this.StackUnknown.Visibility =
+            (!this.CheckShowUnknownFlags.IsChecked.Value) ? Visibility.Hidden : Visibility.Visible;
+        this.TextUnknownWarning.Visibility =
+            (!this.CheckShowUnknownFlags.IsChecked.Value)
+                ? Visibility.Collapsed
+                : Visibility.Visible;
     }
 }

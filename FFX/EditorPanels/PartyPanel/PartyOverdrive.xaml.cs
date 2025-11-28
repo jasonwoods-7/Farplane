@@ -32,7 +32,9 @@ public partial class PartyOverdrive : UserControl
 
         for (var i = 0; i < gridRows; i++)
         {
-            this.GridOverdrive.RowDefinitions.Add(new RowDefinition { Height = new GridLength(30) });
+            this.GridOverdrive.RowDefinitions.Add(
+                new RowDefinition { Height = new GridLength(30) }
+            );
         }
 
         for (var i = 0; i < OverdriveMode.OverdriveModes.Length; i++)
@@ -40,7 +42,7 @@ public partial class PartyOverdrive : UserControl
             var overdriveCheckBox = new CheckBox()
             {
                 Content = OverdriveMode.OverdriveModes[i].Name,
-                VerticalAlignment = VerticalAlignment.Center
+                VerticalAlignment = VerticalAlignment.Center,
             };
             overdriveCheckBox.Checked += (sender, args) => this.ToggleOverdrive(sender);
             overdriveCheckBox.Unchecked += (sender, args) => this.ToggleOverdrive(sender);
@@ -49,19 +51,15 @@ public partial class PartyOverdrive : UserControl
                 Text = "999",
                 Width = 50,
                 HorizontalAlignment = HorizontalAlignment.Right,
-                MaxLength = 5
+                MaxLength = 5,
             };
             overdriveTextBox.KeyDown += this.OverdriveTextBox_KeyDown;
             var overdrivePanel = new DockPanel()
             {
-                Children =
-                {
-                    overdriveCheckBox,
-                    overdriveTextBox
-                },
+                Children = { overdriveCheckBox, overdriveTextBox },
                 Width = 140,
                 Height = 26,
-                Margin = new Thickness(2)
+                Margin = new Thickness(2),
             };
             Grid.SetColumn(overdrivePanel, i / gridRows);
             Grid.SetRow(overdrivePanel, i % gridRows);
@@ -85,16 +83,23 @@ public partial class PartyOverdrive : UserControl
                 return;
             }
 
-            var writeOffset = this._offsetPartyStats + (this._characterIndex * this._sizePartyMember);
+            var writeOffset =
+                this._offsetPartyStats + (this._characterIndex * this._sizePartyMember);
             switch (textBox.Name)
             {
                 case "TextOverdriveCurrent":
-                    writeOffset += (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveLevel));
-                    GameMemory.Write(writeOffset, byte.Parse(this.TextOverdriveCurrent.Text), false);
+                    writeOffset += (int)
+                        Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveLevel));
+                    GameMemory.Write(
+                        writeOffset,
+                        byte.Parse(this.TextOverdriveCurrent.Text),
+                        false
+                    );
                     this.TextOverdriveCurrent.SelectAll();
                     break;
                 case "TextOverdriveMax":
-                    writeOffset += (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMax));
+                    writeOffset += (int)
+                        Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMax));
                     GameMemory.Write(writeOffset, byte.Parse(this.TextOverdriveMax.Text), false);
                     this.TextOverdriveMax.SelectAll();
                     break;
@@ -125,7 +130,10 @@ public partial class PartyOverdrive : UserControl
 
             var odIndex = this.GridOverdrive.Children.IndexOf(panel);
 
-            OverdriveMode.ToggleOverdriveMode(this._characterIndex, OverdriveMode.OverdriveModes[odIndex].BitIndex);
+            OverdriveMode.ToggleOverdriveMode(
+                this._characterIndex,
+                OverdriveMode.OverdriveModes[odIndex].BitIndex
+            );
         }
         this.Refresh(this._characterIndex);
     }
@@ -150,8 +158,11 @@ public partial class PartyOverdrive : UserControl
             try
             {
                 int odCount = ushort.Parse(textBox.Text);
-                OverdriveMode.SetOverdriveCounter(this._characterIndex, OverdriveMode.OverdriveModes[odIndex].BitIndex,
-                    odCount);
+                OverdriveMode.SetOverdriveCounter(
+                    this._characterIndex,
+                    OverdriveMode.OverdriveModes[odIndex].BitIndex,
+                    odCount
+                );
             }
             catch
             {
@@ -173,9 +184,12 @@ public partial class PartyOverdrive : UserControl
 
         var charOffset = this._offsetPartyStats + (this._characterIndex * this._sizePartyMember);
 
-        var offsetLevels = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMode)) + charOffset;
-        var offsetFlags = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveModes)) + charOffset;
-        var offsetCounters = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveWarrior)) + charOffset;
+        var offsetLevels =
+            (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMode)) + charOffset;
+        var offsetFlags =
+            (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveModes)) + charOffset;
+        var offsetCounters =
+            (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveWarrior)) + charOffset;
 
         var odLevels = GameMemory.Read<byte>(offsetLevels, 3, false);
         var odBytes = GameMemory.Read<byte>(offsetFlags, 3, false);
@@ -196,13 +210,16 @@ public partial class PartyOverdrive : UserControl
 
             if (dockPanel.Children[0] is CheckBox checkLearned)
             {
-                checkLearned.IsChecked = learnedOverdrives[OverdriveMode.OverdriveModes[i].BitIndex];
+                checkLearned.IsChecked = learnedOverdrives[
+                    OverdriveMode.OverdriveModes[i].BitIndex
+                ];
             }
 
             if (dockPanel.Children[1] is TextBox textCount)
             {
-                textCount.Text =
-                    BitConverter.ToUInt16(odCounters, OverdriveMode.OverdriveModes[i].BitIndex * 2).ToString();
+                textCount.Text = BitConverter
+                    .ToUInt16(odCounters, OverdriveMode.OverdriveModes[i].BitIndex * 2)
+                    .ToString();
             }
         }
 
@@ -212,7 +229,8 @@ public partial class PartyOverdrive : UserControl
     void ButtonMax_Click(object sender, RoutedEventArgs e)
     {
         var charOffset = this._offsetPartyStats + (this._characterIndex * this._sizePartyMember);
-        var levelOffset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveLevel)) + charOffset;
+        var levelOffset =
+            (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveLevel)) + charOffset;
         var currentMax = GameMemory.Read<byte>(levelOffset, 2, false);
         GameMemory.Write(levelOffset, currentMax[1], false);
         this.Refresh(this._characterIndex);
@@ -226,7 +244,12 @@ public partial class PartyOverdrive : UserControl
         }
 
         var charOffset = this._offsetPartyStats + (this._characterIndex * this._sizePartyMember);
-        var offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMode)) + charOffset;
-        GameMemory.Write(offset, (byte)OverdriveMode.OverdriveModes[this.ComboCurrentOverdrive.SelectedIndex].BitIndex, false);
+        var offset =
+            (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.OverdriveMode)) + charOffset;
+        GameMemory.Write(
+            offset,
+            (byte)OverdriveMode.OverdriveModes[this.ComboCurrentOverdrive.SelectedIndex].BitIndex,
+            false
+        );
     }
 }

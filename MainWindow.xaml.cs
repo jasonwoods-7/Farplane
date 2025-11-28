@@ -117,7 +117,8 @@ public partial class MainWindow : MetroWindow
         }
     }
 
-    void ButtonConfig_Click(object sender, RoutedEventArgs e) => this._configFlyout.IsOpen = !this._configFlyout.IsOpen;
+    void ButtonConfig_Click(object sender, RoutedEventArgs e) =>
+        this._configFlyout.IsOpen = !this._configFlyout.IsOpen;
 
     void SplashLogo_MouseDown(object sender, MouseButtonEventArgs e)
     {
@@ -128,7 +129,12 @@ public partial class MainWindow : MetroWindow
         }
 
         this._splashCounter = 10;
-        var credits = new CreditsWindow { Owner = this, ShowInTaskbar = false, WindowStartupLocation = WindowStartupLocation.CenterOwner };
+        var credits = new CreditsWindow
+        {
+            Owner = this,
+            ShowInTaskbar = false,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+        };
         credits.ShowDialog();
     }
 }

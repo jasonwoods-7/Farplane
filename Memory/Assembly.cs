@@ -20,7 +20,8 @@ public static partial class GameMemory
             MemorySharp.Write((IntPtr)offset, asmBytes, isRelative);
         }
 
-        public static byte[] Generate(string mnemonics, int startOffset = 0) => MemorySharp.Assembly.Assembler.Assemble(mnemonics, (IntPtr)startOffset);
+        public static byte[] Generate(string mnemonics, int startOffset = 0) =>
+            MemorySharp.Assembly.Assembler.Assemble(mnemonics, (IntPtr)startOffset);
 
         public static byte[] Generate(string[] mnemonics, int startOffset = 0)
         {
@@ -28,7 +29,10 @@ public static partial class GameMemory
             var outArrayLen = 0;
             for (var i = 0; i < mnemonics.Length; i++)
             {
-                var assemblyBytes = MemorySharp.Assembly.Assembler.Assemble(mnemonics[i], (IntPtr)startOffset + outArrayLen);
+                var assemblyBytes = MemorySharp.Assembly.Assembler.Assemble(
+                    mnemonics[i],
+                    (IntPtr)startOffset + outArrayLen
+                );
                 outArrayLen += assemblyBytes.Length;
                 assembledByteList.Add(assemblyBytes);
             }

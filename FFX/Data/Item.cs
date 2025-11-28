@@ -143,12 +143,14 @@ public class Item
             var itemID = BitConverter.ToInt16(itemData, i * 2);
             var itemCount = countData[i];
             var item = FromID(itemID);
-            itemList.Add(new Item()
-            {
-                ID = itemID,
-                Name = item == null ? string.Empty : item.Name,
-                Count = itemCount
-            });
+            itemList.Add(
+                new Item()
+                {
+                    ID = itemID,
+                    Name = item == null ? string.Empty : item.Name,
+                    Count = itemCount,
+                }
+            );
         }
 
         return [.. itemList];

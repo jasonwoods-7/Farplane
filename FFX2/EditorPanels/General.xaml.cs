@@ -11,9 +11,11 @@ namespace Farplane.FFX2.EditorPanels;
 public partial class General : UserControl
 {
     readonly int _offsetCurrentGil = (int)OffsetType.CurrentGil;
+
     public General() => this.InitializeComponent();
 
-    public void Refresh() => this.NumGil.Text = LegacyMemoryReader.ReadUInt32(this._offsetCurrentGil).ToString();
+    public void Refresh() =>
+        this.NumGil.Text = LegacyMemoryReader.ReadUInt32(this._offsetCurrentGil).ToString();
 
     void NumGil_OnKeyDown(object sender, KeyEventArgs e)
     {
@@ -26,8 +28,12 @@ public partial class General : UserControl
         if (!parsed)
         {
             // error parsing gil
-            MessageBox.Show("The value you entered was invalid.", "Error parsing gil", MessageBoxButton.OK,
-                MessageBoxImage.Error);
+            MessageBox.Show(
+                "The value you entered was invalid.",
+                "Error parsing gil",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
             return;
         }
 

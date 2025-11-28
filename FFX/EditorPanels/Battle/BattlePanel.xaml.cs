@@ -100,7 +100,8 @@ public partial class BattlePanel : UserControl
 
             // Dump data
             var entityName = StringConverter.ToASCII(readEntity.text_name);
-            var entityFileName = $"BattleEntity_{entityName}_{BattleEntity.GetEntityOffset(EntityType.Enemy, i):X2}_{DateTime.Now:hhmmss}.bin";
+            var entityFileName =
+                $"BattleEntity_{entityName}_{BattleEntity.GetEntityOffset(EntityType.Enemy, i):X2}_{DateTime.Now:hhmmss}.bin";
             General.DumpStruct(readEntity, entityFileName);
 
             var entityTab = this.TabEntity.Items[i] as TabItem;
@@ -140,8 +141,11 @@ public partial class BattlePanel : UserControl
         //if (TabBattle.SelectedIndex == 1 && TabEntity.SelectedIndex >= _enemyCount)
         //    TabEntity.SelectedIndex = 0;
 
-        BattleEntity.ReadEntity((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-            out var entityData);
+        BattleEntity.ReadEntity(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            out var entityData
+        );
 
         // Refresh stats panel
         this.TextCurrentHP.Text = entityData.hp_current.ToString();
@@ -211,14 +215,24 @@ public partial class BattlePanel : UserControl
         }
     }
 
-    void SetPositiveStatus(EntityType entityType, int entityIndex, string statusOffset, bool statusState)
+    void SetPositiveStatus(
+        EntityType entityType,
+        int entityIndex,
+        string statusOffset,
+        bool statusState
+    )
     {
         if (!this._canWriteData)
         {
             return;
         }
 
-        BattleEntity.WriteBytes(entityType, entityIndex, statusOffset, statusState ? (byte)0xFF : (byte)0);
+        BattleEntity.WriteBytes(
+            entityType,
+            entityIndex,
+            statusOffset,
+            statusState ? (byte)0xFF : (byte)0
+        );
     }
 
     void TabBattle_OnSelectionChanged(object sender, SelectionChangedEventArgs e) => this.Refresh();
@@ -248,77 +262,149 @@ public partial class BattlePanel : UserControl
             switch (senderBox.Name)
             {
                 case "TextCurrentHP":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.hp_current), BitConverter.GetBytes(int.Parse(senderBox.Text)));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.hp_current),
+                        BitConverter.GetBytes(int.Parse(senderBox.Text))
+                    );
                     break;
                 case "TextCurrentMP":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.mp_current), BitConverter.GetBytes(int.Parse(senderBox.Text)));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.mp_current),
+                        BitConverter.GetBytes(int.Parse(senderBox.Text))
+                    );
                     break;
                 case "TextMaxHP":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.hp_max), BitConverter.GetBytes(int.Parse(senderBox.Text)));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.hp_max),
+                        BitConverter.GetBytes(int.Parse(senderBox.Text))
+                    );
                     break;
 
                 case "TextMaxMP":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.mp_max), BitConverter.GetBytes(int.Parse(senderBox.Text)));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.mp_max),
+                        BitConverter.GetBytes(int.Parse(senderBox.Text))
+                    );
                     break;
                 case "TextOverdrive":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.overdrive_current), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.overdrive_current),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextOverdriveMax":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.overdrive_max), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.overdrive_max),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextStrength":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.strength), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.strength),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextDefense":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.defense), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.defense),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextMagic":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.magic), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.magic),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextMagicDefense":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.magic_defense), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.magic_defense),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextAgility":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.agility), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.agility),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextLuck":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.luck), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.luck),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextEvasion":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.evasion), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.evasion),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextAccuracy":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.accuracy), byte.Parse(senderBox.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.accuracy),
+                        byte.Parse(senderBox.Text)
+                    );
                     break;
                 case "TextDoom":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.timer_doom), byte.Parse(this.TextDoom.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.timer_doom),
+                        byte.Parse(this.TextDoom.Text)
+                    );
                     break;
                 case "TextSilence":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.status_turns_silence), byte.Parse(this.TextSilence.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.status_turns_silence),
+                        byte.Parse(this.TextSilence.Text)
+                    );
                     break;
                 case "TextDarkness":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.status_turns_darkness), byte.Parse(this.TextDarkness.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.status_turns_darkness),
+                        byte.Parse(this.TextDarkness.Text)
+                    );
                     break;
                 case "TextSleep":
-                    BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex,
-                        nameof(BattleEntityData.status_turns_sleep), byte.Parse(this.TextSleep.Text));
+                    BattleEntity.WriteBytes(
+                        (EntityType)this.TabBattle.SelectedIndex,
+                        this.TabEntity.SelectedIndex,
+                        nameof(BattleEntityData.status_turns_sleep),
+                        byte.Parse(this.TextSleep.Text)
+                    );
                     break;
             }
         }
@@ -356,10 +442,16 @@ public partial class BattlePanel : UserControl
             }
         }
 
-        BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_turns_sleep", statusTurns);
+        BattleEntity.WriteBytes(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_turns_sleep",
+            statusTurns
+        );
 
         this.Refresh();
     }
+
     void CheckDarkness_OnChecked(object sender, RoutedEventArgs e)
     {
         if (!this.CheckBattleState())
@@ -379,16 +471,19 @@ public partial class BattlePanel : UserControl
             {
                 statusTurns = byte.Parse(this.TextDarkness.Text);
             }
-            catch
-            {
-            }
+            catch { }
             if (statusTurns == 0)
             {
                 statusTurns = 3;
             }
         }
 
-        BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_turns_darkness", statusTurns);
+        BattleEntity.WriteBytes(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_turns_darkness",
+            statusTurns
+        );
 
         this.Refresh();
     }
@@ -413,19 +508,23 @@ public partial class BattlePanel : UserControl
             {
                 statusTurns = byte.Parse(this.TextSilence.Text);
             }
-            catch
-            {
-            }
+            catch { }
             if (statusTurns == 0)
             {
                 statusTurns = 3;
             }
         }
 
-        BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_turns_silence", statusTurns);
+        BattleEntity.WriteBytes(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_turns_silence",
+            statusTurns
+        );
 
         this.Refresh();
     }
+
     void CheckFlagNegative_Changed(object sender, RoutedEventArgs e)
     {
         if (!this._canWriteData)
@@ -439,35 +538,110 @@ public partial class BattlePanel : UserControl
         var byteIndex = index / 8;
         var bitIndex = index % 8;
 
-        BattleEntity.ReadEntity((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, out var readEntity);
+        BattleEntity.ReadEntity(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            out var readEntity
+        );
 
         var negativeFlags = readEntity.status_flags_negative;
         negativeFlags[byteIndex] = BitHelper.ToggleBit(negativeFlags[byteIndex], bitIndex);
 
-        BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_flags_negative", negativeFlags);
+        BattleEntity.WriteBytes(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_flags_negative",
+            negativeFlags
+        );
     }
 
-    void CheckShell_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_shell", this.CheckShell.IsChecked.Value);
+    void CheckShell_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_shell",
+            this.CheckShell.IsChecked.Value
+        );
 
-    void CheckProtect_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_protect", this.CheckProtect.IsChecked.Value);
+    void CheckProtect_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_protect",
+            this.CheckProtect.IsChecked.Value
+        );
 
-    void CheckReflect_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_reflect", this.CheckReflect.IsChecked.Value);
+    void CheckReflect_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_reflect",
+            this.CheckReflect.IsChecked.Value
+        );
 
-    void CheckNulTide_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_nultide", this.CheckNulTide.IsChecked.Value);
+    void CheckNulTide_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_nultide",
+            this.CheckNulTide.IsChecked.Value
+        );
 
-    void CheckNulBlaze_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_nulblaze", this.CheckNulBlaze.IsChecked.Value);
+    void CheckNulBlaze_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_nulblaze",
+            this.CheckNulBlaze.IsChecked.Value
+        );
 
-    void CheckNulShock_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_nulshock", this.CheckNulShock.IsChecked.Value);
+    void CheckNulShock_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_nulshock",
+            this.CheckNulShock.IsChecked.Value
+        );
 
-    void CheckNulFrost_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_nulfrost", this.CheckNulFrost.IsChecked.Value);
+    void CheckNulFrost_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_nulfrost",
+            this.CheckNulFrost.IsChecked.Value
+        );
 
-    void CheckRegen_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_regen", this.CheckRegen.IsChecked.Value);
+    void CheckRegen_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_regen",
+            this.CheckRegen.IsChecked.Value
+        );
 
-    void CheckHaste_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_haste", this.CheckHaste.IsChecked.Value);
+    void CheckHaste_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_haste",
+            this.CheckHaste.IsChecked.Value
+        );
 
-    void CheckSlow_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_slow", this.CheckSlow.IsChecked.Value);
+    void CheckSlow_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_slow",
+            this.CheckSlow.IsChecked.Value
+        );
 
-    void CheckUnknown_OnChecked(object sender, RoutedEventArgs e) => this.SetPositiveStatus((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_unknown", this.CheckUnknown.IsChecked.Value);
+    void CheckUnknown_OnChecked(object sender, RoutedEventArgs e) =>
+        this.SetPositiveStatus(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_unknown",
+            this.CheckUnknown.IsChecked.Value
+        );
 
     void CheckPositiveFlag_OnChecked(object sender, RoutedEventArgs e)
     {
@@ -482,11 +656,20 @@ public partial class BattlePanel : UserControl
         var byteIndex = index / 8;
         var bitIndex = index % 8;
 
-        BattleEntity.ReadEntity((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, out var readEntity);
+        BattleEntity.ReadEntity(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            out var readEntity
+        );
 
         var positiveFlags = readEntity.status_flags_positive;
         positiveFlags[byteIndex] = BitHelper.ToggleBit(positiveFlags[byteIndex], bitIndex);
 
-        BattleEntity.WriteBytes((EntityType)this.TabBattle.SelectedIndex, this.TabEntity.SelectedIndex, "status_flags_positive", positiveFlags);
+        BattleEntity.WriteBytes(
+            (EntityType)this.TabBattle.SelectedIndex,
+            this.TabEntity.SelectedIndex,
+            "status_flags_positive",
+            positiveFlags
+        );
     }
 }

@@ -24,11 +24,9 @@ public partial class ConfigFlyout : Flyout
         var currentTheme = ThemeManager.GetAppTheme(Settings.Default.AppTheme);
         var currentAccent = ThemeManager.GetAccent(Settings.Default.AppAccent);
 
-        this.ComboTheme.SelectedIndex =
-            ThemeManager.AppThemes.ToList().IndexOf(currentTheme);
+        this.ComboTheme.SelectedIndex = ThemeManager.AppThemes.ToList().IndexOf(currentTheme);
 
-        this.ComboAccent.SelectedIndex =
-            ThemeManager.Accents.ToList().IndexOf(currentAccent);
+        this.ComboAccent.SelectedIndex = ThemeManager.Accents.ToList().IndexOf(currentAccent);
 
         this.CheckNeverShowUnXWarning.IsChecked = Settings.Default.NeverShowUnXWarning;
         this.CheckCloseWithGame.IsChecked = Settings.Default.CloseWithGame;
@@ -44,7 +42,11 @@ public partial class ConfigFlyout : Flyout
             return;
         }
 
-        ThemeManager.ChangeAppStyle(Application.Current, (Accent)this.ComboAccent.SelectedItem, (AppTheme)this.ComboTheme.SelectedItem);
+        ThemeManager.ChangeAppStyle(
+            Application.Current,
+            (Accent)this.ComboAccent.SelectedItem,
+            (AppTheme)this.ComboTheme.SelectedItem
+        );
         this.SettingUpdated(sender, e);
     }
 

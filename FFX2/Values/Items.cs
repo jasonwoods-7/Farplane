@@ -72,6 +72,6 @@ public static class Items
         "Gyasahl Greens",
         "Sylkis Greens",
         "Mimett Greens",
-        "Pahsana Greens"
+        "Pahsana Greens",
     ];
 }

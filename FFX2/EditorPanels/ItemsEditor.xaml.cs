@@ -33,10 +33,7 @@ public partial class ItemsEditor : UserControl
         {
             var row = i / 2;
             var col = i % 2 == 0 ? 0 : 1;
-            var itemButton = new Button()
-            {
-                Name = "Item" + i
-            };
+            var itemButton = new Button() { Name = "Item" + i };
             this.ItemsGrid.Children.Add(itemButton);
             Grid.SetRow(itemButton, row);
             Grid.SetColumn(itemButton, col);
@@ -101,16 +98,13 @@ public partial class ItemsEditor : UserControl
     {
         this.ResetButton();
 
-        var textItemCount = new TextBox
-        {
-            Text = this.itemCounts[itemNum].ToString()
-        };
+        var textItemCount = new TextBox { Text = this.itemCounts[itemNum].ToString() };
         textItemCount.SelectionStart = textItemCount.Text.Length;
 
         var comboItemType = new ComboBox
         {
             Padding = new Thickness(0D),
-            ItemsSource = Items.ItemNames
+            ItemsSource = Items.ItemNames,
         };
         var selItem = this.itemTypes[itemNum * 2];
         comboItemType.SelectedIndex = selItem > 68 ? 0 : selItem + 1;

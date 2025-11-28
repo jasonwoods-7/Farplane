@@ -67,7 +67,9 @@ public partial class DressphereAbilities : UserControl
         }
 
         // Special dresspheres always fall under Yuna's offset
-        this._baseOffset = (int)OffsetType.AbilityBase + (dressInfo.Special == -1 ? this.SelectedIndex * 0x6A0 : 0);
+        this._baseOffset =
+            (int)OffsetType.AbilityBase
+            + (dressInfo.Special == -1 ? this.SelectedIndex * 0x6A0 : 0);
 
         var abilities = dressInfo.Abilities;
 
@@ -132,7 +134,9 @@ public partial class DressphereAbilities : UserControl
         }
 
         var abilityNum = int.Parse((sender as Button).Name.Substring(7));
-        var dressInfo = Dresspheres.GetDresspheres().FirstOrDefault(ds => ds.ID == this.Dressphere.SelectedIndex);
+        var dressInfo = Dresspheres
+            .GetDresspheres()
+            .FirstOrDefault(ds => ds.ID == this.Dressphere.SelectedIndex);
 
         var ability = dressInfo.Abilities[abilityNum];
 
@@ -146,7 +150,10 @@ public partial class DressphereAbilities : UserControl
 
         var newAp = apDialog.AP;
 
-        LegacyMemoryReader.WriteBytes(this._baseOffset + ability.Offset, BitConverter.GetBytes((ushort)newAp));
+        LegacyMemoryReader.WriteBytes(
+            this._baseOffset + ability.Offset,
+            BitConverter.GetBytes((ushort)newAp)
+        );
 
         this.RefreshAbilities();
     }
@@ -158,7 +165,9 @@ public partial class DressphereAbilities : UserControl
             return;
         }
 
-        var dressInfo = Dresspheres.GetDresspheres().FirstOrDefault(ds => ds.ID == this.Dressphere.SelectedIndex);
+        var dressInfo = Dresspheres
+            .GetDresspheres()
+            .FirstOrDefault(ds => ds.ID == this.Dressphere.SelectedIndex);
         if (dressInfo == null)
         {
             return;
@@ -180,7 +189,10 @@ public partial class DressphereAbilities : UserControl
                 continue;
             }
 
-            LegacyMemoryReader.WriteBytes(this._baseOffset + abil.Offset, BitConverter.GetBytes((ushort)abil.MasteredAP));
+            LegacyMemoryReader.WriteBytes(
+                this._baseOffset + abil.Offset,
+                BitConverter.GetBytes((ushort)abil.MasteredAP)
+            );
         }
 
         this.RefreshAbilities();

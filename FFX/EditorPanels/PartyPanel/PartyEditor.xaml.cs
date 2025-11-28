@@ -9,6 +9,7 @@ namespace Farplane.FFX.EditorPanels.PartyPanel;
 public partial class PartyEditor : UserControl
 {
     int _character = -1;
+
     public PartyEditor() => this.InitializeComponent();
 
     public void Refresh()

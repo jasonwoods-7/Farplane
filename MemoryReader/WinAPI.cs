@@ -46,5 +46,5 @@ public enum ProcessAccessFlags : uint
     SetInformation = 0x00000200,
     QueryInformation = 0x00000400,
     QueryLimitedInformation = 0x00001000,
-    Synchronize = 0x00100000
+    Synchronize = 0x00100000,
 }

@@ -44,8 +44,12 @@ public partial class FFXEditor : MetroWindow
     readonly NotAvailablePanel _notAvailablePanel = new();
     bool _rolledUp = false;
     bool _windowPinned = false;
-    readonly BitmapImage _iconShrink = new(new Uri("pack://application:,,,/Resources/Images/shrink.png"));
-    readonly BitmapImage _iconExpand = new(new Uri("pack://application:,,,/Resources/Images/expand.png"));
+    readonly BitmapImage _iconShrink = new(
+        new Uri("pack://application:,,,/Resources/Images/shrink.png")
+    );
+    readonly BitmapImage _iconExpand = new(
+        new Uri("pack://application:,,,/Resources/Images/expand.png")
+    );
 
     public FFXEditor(bool fileMode = false)
     {
@@ -152,7 +156,6 @@ public partial class FFXEditor : MetroWindow
         {
             MessageBox.Show($"Exception loading panel:\n{ex.Message}");
         }
-
     }
 
     public void RefreshAllPanels()

@@ -8,8 +8,10 @@ namespace Farplane.FFX.Data;
 
 public class KernelTable
 {
-    static readonly int stringOffset1 = (int)Marshal.OffsetOf<KernelBlockHeader>(nameof(KernelBlockHeader.StringOffset1));
-    static readonly int stringOffset2 = (int)Marshal.OffsetOf<KernelBlockHeader>(nameof(KernelBlockHeader.StringOffset2));
+    static readonly int stringOffset1 = (int)
+        Marshal.OffsetOf<KernelBlockHeader>(nameof(KernelBlockHeader.StringOffset1));
+    static readonly int stringOffset2 = (int)
+        Marshal.OffsetOf<KernelBlockHeader>(nameof(KernelBlockHeader.StringOffset2));
 
     readonly byte[] _stringTable;
     readonly byte[] _dataBlock;
@@ -25,7 +27,11 @@ public class KernelTable
         this._kernelHeader = GameMemory.Read<KernelFileHeader>(startOffset, false);
 
         // Read block data
-        this._dataBlock = GameMemory.Read<byte>(startOffset + 0x10, this._kernelHeader.DataLength, false);
+        this._dataBlock = GameMemory.Read<byte>(
+            startOffset + 0x10,
+            this._kernelHeader.DataLength,
+            false
+        );
 
         // Calculate string table length
         var stringTableLength = 0;
@@ -49,12 +55,20 @@ public class KernelTable
         }
 
         // Add length of last string to table length
-        var lastString = GameMemory.Read<byte>(startOffset + this._kernelHeader.DataLength + 0x14 + stringTableLength, 512, false);
+        var lastString = GameMemory.Read<byte>(
+            startOffset + this._kernelHeader.DataLength + 0x14 + stringTableLength,
+            512,
+            false
+        );
         var lastStringLength = Array.IndexOf(lastString, (byte)0) + 3; // for 0x004700 end string marker
         stringTableLength += lastStringLength;
 
         // Read string table
-        this._stringTable = GameMemory.Read<byte>(startOffset + this._kernelHeader.DataLength + 0x14, stringTableLength, false);
+        this._stringTable = GameMemory.Read<byte>(
+            startOffset + this._kernelHeader.DataLength + 0x14,
+            stringTableLength,
+            false
+        );
     }
 
     public KernelTable(string fileName)
@@ -83,16 +97,31 @@ public class KernelTable
     public string GetString1(int blockIndex)
     {
         var block = this.GetBlock(blockIndex);
-        var stringOffset = BitConverter.ToUInt16(this._dataBlock, (blockIndex * this._kernelHeader.BlockLength) + stringOffset1);
-        var stringBytes = new byte[stringOffset + 512 > this._stringTable.Length ? this._stringTable.Length - stringOffset : 512];
+        var stringOffset = BitConverter.ToUInt16(
+            this._dataBlock,
+            (blockIndex * this._kernelHeader.BlockLength) + stringOffset1
+        );
+        var stringBytes = new byte[
+            stringOffset + 512 > this._stringTable.Length
+                ? this._stringTable.Length - stringOffset
+                : 512
+        ];
         Array.Copy(this._stringTable, stringOffset, stringBytes, 0, stringBytes.Length);
         return StringConverter.ToASCII(stringBytes);
     }
+
     public string GetString2(int blockIndex)
     {
         var block = this.GetBlock(blockIndex);
-        var stringOffset = BitConverter.ToUInt16(this._dataBlock, (blockIndex * this._kernelHeader.BlockLength) + stringOffset2);
-        var stringBytes = new byte[stringOffset + 512 > this._stringTable.Length ? this._stringTable.Length - stringOffset : 512];
+        var stringOffset = BitConverter.ToUInt16(
+            this._dataBlock,
+            (blockIndex * this._kernelHeader.BlockLength) + stringOffset2
+        );
+        var stringBytes = new byte[
+            stringOffset + 512 > this._stringTable.Length
+                ? this._stringTable.Length - stringOffset
+                : 512
+        ];
         Array.Copy(this._stringTable, stringOffset, stringBytes, 0, stringBytes.Length);
         return StringConverter.ToASCII(stringBytes);
     }
@@ -100,7 +129,13 @@ public class KernelTable
     public byte[] GetBlock(int blockIndex)
     {
         var kernelData = new byte[this._kernelHeader.BlockLength];
-        Array.Copy(this._dataBlock, this._kernelHeader.BlockLength * blockIndex, kernelData, 0, kernelData.Length);
+        Array.Copy(
+            this._dataBlock,
+            this._kernelHeader.BlockLength * blockIndex,
+            kernelData,
+            0,
+            kernelData.Length
+        );
 
         return kernelData;
     }
@@ -111,14 +146,19 @@ public struct KernelFileHeader
 {
     [MarshalAs(UnmanagedType.U4)]
     public int TableHeader;
+
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
     public byte[] Padding;
+
     [MarshalAs(UnmanagedType.U1)]
     public byte LastBlockIndex;
+
     [MarshalAs(UnmanagedType.U1)]
     public byte unknown;
+
     [MarshalAs(UnmanagedType.U2)]
     public ushort BlockLength;
+
     [MarshalAs(UnmanagedType.U2)]
     public ushort DataLength;
 }
@@ -139,6 +179,7 @@ public struct KernelBlockHeader
 public struct KernelBlock
 {
     public KernelBlockHeader BlockHeader;
+
     [MarshalAs(UnmanagedType.ByValArray)]
     public byte[] BlockData;
 }

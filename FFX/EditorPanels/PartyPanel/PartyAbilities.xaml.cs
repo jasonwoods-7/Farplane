@@ -22,18 +22,31 @@ public partial class PartyAbilities : UserControl
     readonly ButtonGrid _gridWhiteMagic = new(2, 22);
     readonly ButtonGrid _gridBlackMagic = new(2, 19);
 
-    readonly Ability[] _skills = Ability.Abilities.Where(a => a.Type == AbilityType.Skill).ToArray();
-    readonly Ability[] _specials = Ability.Abilities.Where(a => a.Type == AbilityType.Special).ToArray();
-    readonly Ability[] _wMagic = Ability.Abilities.Where(a => a.Type == AbilityType.WhiteMagic).ToArray();
-    readonly Ability[] _bMagic = Ability.Abilities.Where(a => a.Type == AbilityType.BlackMagic).ToArray();
+    readonly Ability[] _skills = Ability
+        .Abilities.Where(a => a.Type == AbilityType.Skill)
+        .ToArray();
+    readonly Ability[] _specials = Ability
+        .Abilities.Where(a => a.Type == AbilityType.Special)
+        .ToArray();
+    readonly Ability[] _wMagic = Ability
+        .Abilities.Where(a => a.Type == AbilityType.WhiteMagic)
+        .ToArray();
+    readonly Ability[] _bMagic = Ability
+        .Abilities.Where(a => a.Type == AbilityType.BlackMagic)
+        .ToArray();
     int _characterIndex = -1;
 
-    static readonly Tuple<AppTheme, Accent> currentStyle = ThemeManager.DetectAppStyle(Application.Current);
+    static readonly Tuple<AppTheme, Accent> currentStyle = ThemeManager.DetectAppStyle(
+        Application.Current
+    );
 
-    readonly Brush _trueAbilityBrush =
-        new SolidColorBrush((Color)currentStyle.Item1.Resources["BlackColor"]);
+    readonly Brush _trueAbilityBrush = new SolidColorBrush(
+        (Color)currentStyle.Item1.Resources["BlackColor"]
+    );
 
-    readonly Brush _falseAbilityBrush = new SolidColorBrush((Color)currentStyle.Item1.Resources["Gray2"]);
+    readonly Brush _falseAbilityBrush = new SolidColorBrush(
+        (Color)currentStyle.Item1.Resources["Gray2"]
+    );
 
     public PartyAbilities()
     {
@@ -128,28 +141,36 @@ public partial class PartyAbilities : UserControl
         for (var i = 0; i < this._skills.Length; i++)
         {
             var button = (Button)this._gridSkill.GridBase.Children[i];
-            button.Foreground = skillArray[this._skills[i].BitOffset] ? this._trueAbilityBrush : this._falseAbilityBrush;
+            button.Foreground = skillArray[this._skills[i].BitOffset]
+                ? this._trueAbilityBrush
+                : this._falseAbilityBrush;
             button.Content = this._skills[i].Name;
         }
 
         for (var i = 0; i < this._specials.Length; i++)
         {
             var button = (Button)this._gridSpecial.GridBase.Children[i];
-            button.Foreground = skillArray[this._specials[i].BitOffset] ? this._trueAbilityBrush : this._falseAbilityBrush;
+            button.Foreground = skillArray[this._specials[i].BitOffset]
+                ? this._trueAbilityBrush
+                : this._falseAbilityBrush;
             button.Content = this._specials[i].Name;
         }
 
         for (var i = 0; i < this._wMagic.Length; i++)
         {
             var button = (Button)this._gridWhiteMagic.GridBase.Children[i];
-            button.Foreground = skillArray[this._wMagic[i].BitOffset] ? this._trueAbilityBrush : this._falseAbilityBrush;
+            button.Foreground = skillArray[this._wMagic[i].BitOffset]
+                ? this._trueAbilityBrush
+                : this._falseAbilityBrush;
             button.Content = this._wMagic[i].Name;
         }
 
         for (var i = 0; i < this._bMagic.Length; i++)
         {
             var button = (Button)this._gridBlackMagic.GridBase.Children[i];
-            button.Foreground = skillArray[this._bMagic[i].BitOffset] ? this._trueAbilityBrush : this._falseAbilityBrush;
+            button.Foreground = skillArray[this._bMagic[i].BitOffset]
+                ? this._trueAbilityBrush
+                : this._falseAbilityBrush;
             button.Content = this._bMagic[i].Name;
         }
     }

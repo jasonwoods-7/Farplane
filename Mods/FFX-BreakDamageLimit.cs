@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Windows;
-
 using Farplane;
 using Farplane.Common;
 using Farplane.FarplaneMod;
@@ -15,12 +14,17 @@ public class FFXBreakDamageLimit : IFarplaneMod
 {
     private bool _modActive = false;
     private static int _offsetDamageLimit = 0x38ED3D;
-    public void Configure(object parentWindow)
-    {
 
+    public void Configure(object parentWindow) { }
+
+    public string ConfigButton
+    {
+        get { return null; }
     }
-    public string ConfigButton { get { return null; } }
-    public bool AutoActivate { get { return true; } }
+    public bool AutoActivate
+    {
+        get { return true; }
+    }
     public string Name
     {
         get { return "Break Damage Limit"; }
@@ -43,23 +47,18 @@ public class FFXBreakDamageLimit : IFarplaneMod
 
     public ModState GetState()
     {
-        if (_modActive) return ModState.Activated;
+        if (_modActive)
+            return ModState.Activated;
         return ModState.Deactivated;
     }
 
     public void Activate()
     {
-        if (_modActive) return;
+        if (_modActive)
+            return;
         ModLogger.WriteLine("Activating Break Damage Limit");
 
-        var assembly = new []
-        {
-            "nop",
-            "nop",
-            "nop",
-            "nop",
-            "mov ebx,0x7FFFFFFF"
-        };
+        var assembly = new[] { "nop", "nop", "nop", "nop", "mov ebx,0x7FFFFFFF" };
 
         GameMemory.Assembly.Inject(_offsetDamageLimit, assembly);
 
@@ -68,7 +67,8 @@ public class FFXBreakDamageLimit : IFarplaneMod
 
     public void Deactivate()
     {
-        if (!_modActive) return;
+        if (!_modActive)
+            return;
         ModLogger.WriteLine("Deactivating Break Damage Limit");
         ModLogger.WriteLine("Deactivation NYI");
         _modActive = false;

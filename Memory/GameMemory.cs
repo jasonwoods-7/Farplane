@@ -81,12 +81,17 @@ public static partial class GameMemory
             stringHash = moduleHash.Aggregate(
                 new StringBuilder(),
                 (sb, hb) => sb.Append(hb.ToString("X2")),
-                sb => sb.ToString());
+                sb => sb.ToString()
+            );
         }
         catch
         {
-            var proceed = MessageBox.Show("An error occurred while validating the selected process:\n{ex.Message}\n\nWould you like to continue anyway?", "Process verification error",
-                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            var proceed = MessageBox.Show(
+                "An error occurred while validating the selected process:\n{ex.Message}\n\nWould you like to continue anyway?",
+                "Process verification error",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Exclamation
+            );
             return proceed == MessageBoxResult.Yes;
         }
 
@@ -95,12 +100,16 @@ public static partial class GameMemory
         {
             // No matching hash
             Console.WriteLine("Hash: " + stringHash);
-            var proceed = MessageBox.Show("The selected process does not appear to match any known compatible processes.\n\n" +
-                                          "Farplane will attempt to calculate offsets automatically, but proceeding " +
-                                          "may cause errors or cause the game to crash. Now is a good time to make a " +
-                                          "backup of your saved games!\n\n" +
-                                          "Are you sure you wish to continue?", "Unknown process error",
-                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            var proceed = MessageBox.Show(
+                "The selected process does not appear to match any known compatible processes.\n\n"
+                    + "Farplane will attempt to calculate offsets automatically, but proceeding "
+                    + "may cause errors or cause the game to crash. Now is a good time to make a "
+                    + "backup of your saved games!\n\n"
+                    + "Are you sure you wish to continue?",
+                "Unknown process error",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Exclamation
+            );
             return proceed == MessageBoxResult.Yes;
         }
 
@@ -115,18 +124,22 @@ public static partial class GameMemory
         }
 
         var modules = MemorySharp.Modules.RemoteModules.ToList();
-        var unxModule =
-            modules.FirstOrDefault(
-                module => string.Compare(module.Name, "unx.dll", StringComparison.CurrentCultureIgnoreCase) == 0);
+        var unxModule = modules.FirstOrDefault(module =>
+            string.Compare(module.Name, "unx.dll", StringComparison.CurrentCultureIgnoreCase) == 0
+        );
 
         if (unxModule != null && !Settings.Default.NeverShowUnXWarning)
         {
             // UnX is installed, display warning message
-            MessageBox.Show("Farplane has detected that Untitled Project X (unx.dll) is currently loaded.\n\n" +
-                            "Some features of UnX, even when disabled, will overwrite changes made by Farplane, " +
-                            "leading to unpredictable results.\n\n" +
-                            "This warning message can be disabled from the Settings menu.", "UnX Warning",
-                MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(
+                "Farplane has detected that Untitled Project X (unx.dll) is currently loaded.\n\n"
+                    + "Some features of UnX, even when disabled, will overwrite changes made by Farplane, "
+                    + "leading to unpredictable results.\n\n"
+                    + "This warning message can be disabled from the Settings menu.",
+                "UnX Warning",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
         }
     }
 

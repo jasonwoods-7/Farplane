@@ -20,5 +20,6 @@ public partial class CommandEditor : UserControl
         }
     }
 
-    void ListCommands_OnSelectionChanged(object sender, SelectionChangedEventArgs e) => this.Description.Text = Skills.GetSkillDescription(this.ListCommands.SelectedIndex);
+    void ListCommands_OnSelectionChanged(object sender, SelectionChangedEventArgs e) =>
+        this.Description.Text = Skills.GetSkillDescription(this.ListCommands.SelectedIndex);
 }

@@ -24,16 +24,15 @@ public partial class ItemsPanel : UserControl
     readonly ButtonGrid _itemButtons = new(2, 112);
     readonly ButtonGrid _keyItemButtons = new(2, KeyItem.KeyItems.Length - 1);
 
-    static readonly ComboBox ComboItemList = new() { ItemsSource = Item.Items.Select(item => item.Name) };
+    static readonly ComboBox ComboItemList = new()
+    {
+        ItemsSource = Item.Items.Select(item => item.Name),
+    };
     static readonly TextBox TextItemCount = new();
     static readonly StackPanel PanelEditItem = new()
     {
         Orientation = Orientation.Horizontal,
-        Children =
-        {
-            ComboItemList,
-            TextItemCount
-        }
+        Children = { ComboItemList, TextItemCount },
     };
 
     bool _refreshing = false;
@@ -44,9 +43,15 @@ public partial class ItemsPanel : UserControl
     bool[] _keyItemState;
     bool[] _alBhedState;
 
-    static readonly Tuple<AppTheme, Accent> currentStyle = ThemeManager.DetectAppStyle(Application.Current);
-    readonly Brush _trueKeyItemBrush = new SolidColorBrush((Color)currentStyle.Item1.Resources["BlackColor"]);
-    readonly Brush _falseKeyItemBrush = new SolidColorBrush((Color)currentStyle.Item1.Resources["Gray2"]);
+    static readonly Tuple<AppTheme, Accent> currentStyle = ThemeManager.DetectAppStyle(
+        Application.Current
+    );
+    readonly Brush _trueKeyItemBrush = new SolidColorBrush(
+        (Color)currentStyle.Item1.Resources["BlackColor"]
+    );
+    readonly Brush _falseKeyItemBrush = new SolidColorBrush(
+        (Color)currentStyle.Item1.Resources["Gray2"]
+    );
 
     public ItemsPanel()
     {
@@ -150,7 +155,10 @@ public partial class ItemsPanel : UserControl
             else
             {
                 // Show item name and count
-                this._itemButtons.SetContent(i, this._currentItems[i].Name + " x" + this._currentItems[i].Count);
+                this._itemButtons.SetContent(
+                    i,
+                    this._currentItems[i].Name + " x" + this._currentItems[i].Count
+                );
             }
         }
 

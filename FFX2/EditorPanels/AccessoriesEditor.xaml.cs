@@ -32,10 +32,7 @@ public partial class AccessoriesEditor : UserControl
         {
             var row = i / 2;
             var col = i % 2 == 0 ? 0 : 1;
-            var itemButton = new Button()
-            {
-                Name = "Accessory" + i
-            };
+            var itemButton = new Button() { Name = "Accessory" + i };
             this.ItemsGrid.Children.Add(itemButton);
             Grid.SetRow(itemButton, row);
             Grid.SetColumn(itemButton, col);
@@ -49,8 +46,9 @@ public partial class AccessoriesEditor : UserControl
 
         for (var i = 0; i < 128; i++)
         {
-
-            var button = this.ItemsGrid.Children.OfType<Button>().First(butt => butt.Name == "Accessory" + i);
+            var button = this
+                .ItemsGrid.Children.OfType<Button>()
+                .First(butt => butt.Name == "Accessory" + i);
 
             this.SetButtonText(button, i);
             button.Click += (sender, args) =>
@@ -99,16 +97,10 @@ public partial class AccessoriesEditor : UserControl
     {
         this.ResetButton();
 
-        var textItemCount = new TextBox
-        {
-            Text = this.itemCounts[itemNum].ToString()
-        };
+        var textItemCount = new TextBox { Text = this.itemCounts[itemNum].ToString() };
         textItemCount.SelectionStart = textItemCount.Text.Length;
 
-        var comboItemType = new ComboBox
-        {
-            Padding = new Thickness(0D)
-        };
+        var comboItemType = new ComboBox { Padding = new Thickness(0D) };
         var accessories = Accessories.GetNames();
         accessories.Insert(0, "None");
         comboItemType.ItemsSource = accessories;

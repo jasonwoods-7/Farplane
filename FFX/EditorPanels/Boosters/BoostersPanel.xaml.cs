@@ -27,13 +27,15 @@ public partial class BoostersPanel
 
         for (var i = 0; i < 8; i++)
         {
-            this.ShareBoxes.Children.Add(new CheckBox()
-            {
-                Name = "CheckBoxAPShare" + i,
-                Content = (Character)i,
-                Margin = new Thickness(5),
-                IsChecked = i != 7
-            });
+            this.ShareBoxes.Children.Add(
+                new CheckBox()
+                {
+                    Name = "CheckBoxAPShare" + i,
+                    Content = (Character)i,
+                    Margin = new Thickness(5),
+                    IsChecked = i != 7,
+                }
+            );
         }
     }
 
@@ -67,6 +69,7 @@ public partial class BoostersPanel
             this._sharedApState[i] = box.IsChecked.Value ? (byte)1 : gainedAp[i];
         }
     }
+
     void SharedAPThread()
     {
         while (true)

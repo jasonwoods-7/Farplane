@@ -11,7 +11,6 @@ namespace Farplane.FFX.EditorPanels.GeneralPanel;
 /// </summary>
 public partial class GeneralPanel : UserControl
 {
-
     readonly Character[] _enumValues = (Character[])Enum.GetValues(typeof(Character));
     bool _refreshing = false;
 

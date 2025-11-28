@@ -31,7 +31,8 @@ public partial class ButtonGrid : UserControl
     public bool ShowScrollBar
     {
         get => this.ScrollViewer.VerticalScrollBarVisibility == ScrollBarVisibility.Visible;
-        set => this.ScrollViewer.VerticalScrollBarVisibility = value
+        set =>
+            this.ScrollViewer.VerticalScrollBarVisibility = value
                 ? ScrollBarVisibility.Visible
                 : ScrollBarVisibility.Hidden;
     }
@@ -63,7 +64,7 @@ public partial class ButtonGrid : UserControl
             {
                 Name = "Button" + b,
                 Content = "BUTTON",
-                Margin = new Thickness(1)
+                Margin = new Thickness(1),
             };
             Grid.SetRow(newButton, row);
             Grid.SetColumn(newButton, column);

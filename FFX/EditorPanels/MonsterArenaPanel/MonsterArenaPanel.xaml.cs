@@ -13,7 +13,6 @@ namespace Farplane.FFX.EditorPanels.MonsterArenaPanel;
 /// </summary>
 public partial class MonsterArenaPanel : UserControl
 {
-
     public MonsterArenaPanel()
     {
         this.InitializeComponent();
@@ -33,7 +32,9 @@ public partial class MonsterArenaPanel : UserControl
 
         var arenaBytes = MonsterArena.GetCaptureCounts();
 
-        var selectedArea = this.ListMonsterArenaAreas.Items.IndexOf(this.ListMonsterArenaAreas.SelectedItem);
+        var selectedArea = this.ListMonsterArenaAreas.Items.IndexOf(
+            this.ListMonsterArenaAreas.SelectedItem
+        );
         var monsters = MonsterArenaData.MonsterArenaAreas[selectedArea].Monsters;
 
         for (var i = 0; i < monsters.Length; i++)
@@ -47,16 +48,20 @@ public partial class MonsterArenaPanel : UserControl
             var monsterName = new TextBlock()
             {
                 Text = monsters[i].Name,
-                VerticalAlignment = VerticalAlignment.Center
+                VerticalAlignment = VerticalAlignment.Center,
             };
             var monsterCount = new TextBox()
             {
                 Text = count.ToString(),
                 Width = 40,
                 HorizontalAlignment = HorizontalAlignment.Right,
-                VerticalAlignment = VerticalAlignment.Bottom
+                VerticalAlignment = VerticalAlignment.Bottom,
             };
-            var monsterPanel = new DockPanel { Children = { monsterName, monsterCount }, Margin = new Thickness(5) };
+            var monsterPanel = new DockPanel
+            {
+                Children = { monsterName, monsterCount },
+                Margin = new Thickness(5),
+            };
 
             monsterCount.KeyDown += (sender, args) =>
             {
@@ -68,8 +73,9 @@ public partial class MonsterArenaPanel : UserControl
                 try
                 {
                     var textBox = sender as TextBox;
-                    var panelIndex =
-                        this.GridMonsterArenaMonsters.Children.IndexOf((DockPanel)textBox.Parent);
+                    var panelIndex = this.GridMonsterArenaMonsters.Children.IndexOf(
+                        (DockPanel)textBox.Parent
+                    );
                     var monsterIndex = monsters[panelIndex].Index;
                     this.WriteMonster(monsterIndex, byte.Parse(monsterCount.Text));
                     this.Refresh();
@@ -79,7 +85,6 @@ public partial class MonsterArenaPanel : UserControl
                 {
                     Error.Show("Please enter a value between 0 and 255");
                 }
-
             };
 
             Grid.SetColumn(monsterPanel, column);
@@ -91,9 +96,14 @@ public partial class MonsterArenaPanel : UserControl
 
     void WriteMonster(int index, byte count) => MonsterArena.SetCaptureCount(index, count);
 
-    void ListMonsterArenaAreas_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    void ListMonsterArenaAreas_OnSelectedItemChanged(
+        object sender,
+        RoutedPropertyChangedEventArgs<object> e
+    )
     {
-        var index = this.ListMonsterArenaAreas.Items.IndexOf(this.ListMonsterArenaAreas.SelectedItem);
+        var index = this.ListMonsterArenaAreas.Items.IndexOf(
+            this.ListMonsterArenaAreas.SelectedItem
+        );
         var areaName = MonsterArenaData.MonsterArenaAreas[index].Name;
         this.GroupMonsters.Header = areaName;
         this.Refresh();
@@ -101,12 +111,14 @@ public partial class MonsterArenaPanel : UserControl
 
     void ButtonCaptureAll_Click(object sender, RoutedEventArgs e)
     {
-
         for (var i = 0; i < MonsterArenaData.MonsterArenaAreas.Length; i++)
         {
             for (var j = 0; j < MonsterArenaData.MonsterArenaAreas[i].Monsters.Length; j++)
             {
-                MonsterArena.SetCaptureCount(MonsterArenaData.MonsterArenaAreas[i].Monsters[j].Index, i > 12 ? (byte)1 : (byte)10);
+                MonsterArena.SetCaptureCount(
+                    MonsterArenaData.MonsterArenaAreas[i].Monsters[j].Index,
+                    i > 12 ? (byte)1 : (byte)10
+                );
             }
         }
 
@@ -119,7 +131,10 @@ public partial class MonsterArenaPanel : UserControl
         {
             for (var j = 0; j < MonsterArenaData.MonsterArenaAreas[i].Monsters.Length; j++)
             {
-                MonsterArena.SetCaptureCount(MonsterArenaData.MonsterArenaAreas[i].Monsters[j].Index, 0);
+                MonsterArena.SetCaptureCount(
+                    MonsterArenaData.MonsterArenaAreas[i].Monsters[j].Index,
+                    0
+                );
             }
         }
 

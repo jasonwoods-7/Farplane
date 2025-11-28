@@ -21,8 +21,13 @@ public partial class BlitzballLeagueEditor : UserControl
         this.InitializeComponent();
 
         this._refresh = true;
-        this.ComboLeagueStatus.ItemsSource = BlitzballValues.LeagueStates.Select(state => state.Name);
-        foreach (var teamCombo in this.FindChildren<ComboBox>().Where(child => child.Name.StartsWith("LeagueTeam")))
+        this.ComboLeagueStatus.ItemsSource = BlitzballValues.LeagueStates.Select(state =>
+            state.Name
+        );
+        foreach (
+            var teamCombo in this.FindChildren<ComboBox>()
+                .Where(child => child.Name.StartsWith("LeagueTeam"))
+        )
         {
             teamCombo.ItemsSource = BlitzballValues.Teams.Select(team => team.Name);
         }
@@ -37,8 +42,10 @@ public partial class BlitzballLeagueEditor : UserControl
         var blitzData = Blitzball.ReadBlitzballData();
 
         // Update League status
-        var leagueStatusIndex =
-            Array.IndexOf(BlitzballValues.LeagueStates, BlitzballValues.LeagueStates.First(state => state.Index == blitzData.LeagueStatus));
+        var leagueStatusIndex = Array.IndexOf(
+            BlitzballValues.LeagueStates,
+            BlitzballValues.LeagueStates.First(state => state.Index == blitzData.LeagueStatus)
+        );
 
         this.ComboLeagueStatus.SelectedIndex = leagueStatusIndex;
 
@@ -61,7 +68,9 @@ public partial class BlitzballLeagueEditor : UserControl
                 continue;
             }
 
-            var currentPrize = prizes.FirstOrDefault(prize => prize.Index == blitzData.BlitzballPrizes[i]);
+            var currentPrize = prizes.FirstOrDefault(prize =>
+                prize.Index == blitzData.BlitzballPrizes[i]
+            );
             if (currentPrize != null)
             {
                 prizeButton.Content = currentPrize.Name;
@@ -78,7 +87,11 @@ public partial class BlitzballLeagueEditor : UserControl
     void Prize_OnClick(object sender, RoutedEventArgs e)
     {
         var prizeButton = sender as Button;
-        var prizeDialog = new SearchDialog(BlitzballValues.Prizes.Select(prize => prize.Name).ToList(), string.Empty, false);
+        var prizeDialog = new SearchDialog(
+            BlitzballValues.Prizes.Select(prize => prize.Name).ToList(),
+            string.Empty,
+            false
+        );
         var dialogResult = prizeDialog.ShowDialog();
         if (dialogResult == false)
         {

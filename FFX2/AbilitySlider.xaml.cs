@@ -9,6 +9,7 @@ namespace Farplane.FFX2;
 public partial class AbilitySlider : MetroWindow
 {
     public int AP => (int)this.SliderAP.Value;
+
     public AbilitySlider(int maxValue, int currentValue)
     {
         this.InitializeComponent();
@@ -19,9 +20,11 @@ public partial class AbilitySlider : MetroWindow
         this.LabelAP.Content = $"{(int)this.SliderAP.Value} / {(int)this.SliderAP.Maximum}";
     }
 
-    void SliderAP_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => this.LabelAP.Content = $"{(int)this.SliderAP.Value} / {(int)this.SliderAP.Maximum}";
+    void SliderAP_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) =>
+        this.LabelAP.Content = $"{(int)this.SliderAP.Value} / {(int)this.SliderAP.Maximum}";
 
-    void ButtonMaster_OnClick(object sender, RoutedEventArgs e) => this.SliderAP.Value = this.SliderAP.Maximum;
+    void ButtonMaster_OnClick(object sender, RoutedEventArgs e) =>
+        this.SliderAP.Value = this.SliderAP.Maximum;
 
     void ButtonSave_OnClick(object sender, RoutedEventArgs e)
     {

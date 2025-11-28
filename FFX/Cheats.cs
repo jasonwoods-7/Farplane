@@ -39,8 +39,16 @@ static class Cheats
             Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseLuck), 255);
             Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseEvasion), 255);
             Party.SetPartyMemberAttribute<byte>(i, nameof(PartyMember.BaseAccuracy), 255);
-            Party.SetPartyMemberAttribute(i, nameof(PartyMember.OverdriveLevel), (byte)overdriveLevel);
-            Party.SetPartyMemberAttribute(i, nameof(PartyMember.OverdriveMax), (byte)overdriveLevel);
+            Party.SetPartyMemberAttribute(
+                i,
+                nameof(PartyMember.OverdriveLevel),
+                (byte)overdriveLevel
+            );
+            Party.SetPartyMemberAttribute(
+                i,
+                nameof(PartyMember.OverdriveMax),
+                (byte)overdriveLevel
+            );
         }
     }
 
@@ -50,7 +58,13 @@ static class Cheats
         for (var i = 0; i < 8; i++)
         {
             var characterOffset = partyOffset + (0x94 * i);
-            LegacyMemoryReader.WriteByte(StructHelper.GetFieldOffset<PartyMember>(nameof(PartyMember.SphereLevelCurrent), characterOffset), 255);
+            LegacyMemoryReader.WriteByte(
+                StructHelper.GetFieldOffset<PartyMember>(
+                    nameof(PartyMember.SphereLevelCurrent),
+                    characterOffset
+                ),
+                255
+            );
         }
     }
 
@@ -59,8 +73,10 @@ static class Cheats
         var partyOffset = OffsetScanner.GetOffset(GameOffset.FFX_PartyStatBase);
         for (var i = 0; i < 18; i++)
         {
-
-            var characterAbilityOffset = partyOffset + (Marshal.SizeOf<PartyMember>() * i) + StructHelper.GetFieldOffset<PartyMember>(nameof(PartyMember.SkillFlags));
+            var characterAbilityOffset =
+                partyOffset
+                + (Marshal.SizeOf<PartyMember>() * i)
+                + StructHelper.GetFieldOffset<PartyMember>(nameof(PartyMember.SkillFlags));
 
             var currentAbilities = LegacyMemoryReader.ReadBytes(characterAbilityOffset, 13);
 

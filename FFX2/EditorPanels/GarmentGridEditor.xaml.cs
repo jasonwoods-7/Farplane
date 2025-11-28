@@ -11,6 +11,7 @@ public partial class GarmentGridEditor : UserControl
 {
     readonly int _offsetGarmentGrids = (int)OffsetType.KnownGarmentGrids;
     bool _refreshing;
+
     public GarmentGridEditor()
     {
         this.InitializeComponent();
@@ -22,7 +23,7 @@ public partial class GarmentGridEditor : UserControl
             {
                 Name = "Grid" + gg.ID,
                 Content = gg.Name,
-                Margin = new Thickness(2)
+                Margin = new Thickness(2),
             };
             ggCheckBox.Checked += this.GarmentGridChanged;
             ggCheckBox.Unchecked += this.GarmentGridChanged;
@@ -73,7 +74,6 @@ public partial class GarmentGridEditor : UserControl
         var ggLen = GarmentGrids.GarmentGridList.Length;
         for (var i = 0; i < GarmentGrids.GarmentGridList.Length; i++)
         {
-
             CheckBox checkBox = null;
             if (i < ggLen / 2)
             {

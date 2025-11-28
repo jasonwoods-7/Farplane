@@ -8,11 +8,19 @@ namespace Farplane.FFX.Values;
 
 public class BattleEntity
 {
-    public static readonly int OffsetPtrParty = OffsetScanner.GetOffset(GameOffset.FFX_BattlePointerParty);
-    public static readonly int OffsetPtrEnemy = OffsetScanner.GetOffset(GameOffset.FFX_BattlePointerEnemy);
+    public static readonly int OffsetPtrParty = OffsetScanner.GetOffset(
+        GameOffset.FFX_BattlePointerParty
+    );
+    public static readonly int OffsetPtrEnemy = OffsetScanner.GetOffset(
+        GameOffset.FFX_BattlePointerEnemy
+    );
     public static readonly FieldInfo[] StructInfo = typeof(BattleEntity).GetFields();
 
-    public static bool ReadEntity(EntityType entityType, int entityIndex, out BattleEntityData outputEntity)
+    public static bool ReadEntity(
+        EntityType entityType,
+        int entityIndex,
+        out BattleEntityData outputEntity
+    )
     {
         var offsetEntity = GetEntityOffset(entityType, entityIndex);
 
@@ -23,7 +31,8 @@ public class BattleEntity
         try
         {
             Marshal.Copy(entityData, 0, ptrEntityData, entityData.Length);
-            outputEntity = (BattleEntityData)Marshal.PtrToStructure(ptrEntityData, typeof(BattleEntityData));
+            outputEntity = (BattleEntityData)
+                Marshal.PtrToStructure(ptrEntityData, typeof(BattleEntityData));
         }
         finally
         {
@@ -51,7 +60,12 @@ public class BattleEntity
         return (int)ptrEntityList + (Battle.BlockLengthEntity * entityIndex);
     }
 
-    public static void WriteBytes(EntityType entityType, int entityIndex, string entityDataType, byte[] dataToWrite)
+    public static void WriteBytes(
+        EntityType entityType,
+        int entityIndex,
+        string entityDataType,
+        byte[] dataToWrite
+    )
     {
         var entityOffset = GetEntityOffset(entityType, entityIndex);
         var dataOffset = entityOffset + (int)Marshal.OffsetOf<BattleEntityData>(entityDataType);
@@ -59,7 +73,12 @@ public class BattleEntity
         GameMemory.Write(dataOffset, dataToWrite, false);
     }
 
-    public static void WriteBytes(EntityType entityType, int entityIndex, string entityDataType, byte dataToWrite)
+    public static void WriteBytes(
+        EntityType entityType,
+        int entityIndex,
+        string entityDataType,
+        byte dataToWrite
+    )
     {
         var entityOffset = GetEntityOffset(entityType, entityIndex);
         var dataOffset = entityOffset + (int)Marshal.OffsetOf<BattleEntityData>(entityDataType);
@@ -70,7 +89,7 @@ public class BattleEntity
 public enum EntityType
 {
     Party,
-    Enemy
+    Enemy,
 }
 
 [StructLayout(LayoutKind.Sequential, Pack = 0, CharSet = CharSet.Ansi, Size = 0xF90)]

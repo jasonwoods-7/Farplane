@@ -38,7 +38,7 @@ public partial class CreditsWindow : MetroWindow
             From = -this.TextMarquee.ActualHeight,
             To = this.GridMain.ActualHeight,
             RepeatBehavior = RepeatBehavior.Forever,
-            Duration = new Duration(TimeSpan.Parse("0:0:30"))
+            Duration = new Duration(TimeSpan.Parse("0:0:30")),
         };
         this.TextMarquee.BeginAnimation(Canvas.BottomProperty, doubleAnimation);
     }

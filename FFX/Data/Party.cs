@@ -126,7 +126,10 @@ public static class Party
 
     public static void ToggleSkillFlag(int partyIndex, int skillFlag)
     {
-        var offset = _offsetParty + (partyIndex * _blockLength) + (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.SkillFlags));
+        var offset =
+            _offsetParty
+            + (partyIndex * _blockLength)
+            + (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.SkillFlags));
         var byteIndex = skillFlag / 8;
         var bitIndex = skillFlag % 8;
 
@@ -162,123 +165,183 @@ public static class Party
 [StructLayout(LayoutKind.Sequential, Pack = 0, CharSet = CharSet.Ansi, Size = 0x94)]
 public struct PartyMember
 {
-    [MarshalAs(UnmanagedType.U2)] public ushort unknown_ushort;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort unknown_ushort;
 
-    [MarshalAs(UnmanagedType.U4)] public int BaseHp;
+    [MarshalAs(UnmanagedType.U4)]
+    public int BaseHp;
 
-    [MarshalAs(UnmanagedType.U4)] public int BaseMp;
+    [MarshalAs(UnmanagedType.U4)]
+    public int BaseMp;
 
-    [MarshalAs(UnmanagedType.U1)] public byte BaseStrength;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte BaseStrength;
 
-    [MarshalAs(UnmanagedType.U1)] public byte BaseDefense;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte BaseDefense;
 
-    [MarshalAs(UnmanagedType.U1)] public byte BaseMagic;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte BaseMagic;
 
-    [MarshalAs(UnmanagedType.U1)] public byte BaseMagicDefense;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte BaseMagicDefense;
 
-    [MarshalAs(UnmanagedType.U1)] public byte BaseAgility;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte BaseAgility;
 
-    [MarshalAs(UnmanagedType.U1)] public byte BaseLuck;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte BaseLuck;
 
-    [MarshalAs(UnmanagedType.U1)] public byte BaseEvasion;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte BaseEvasion;
 
-    [MarshalAs(UnmanagedType.U1)] public byte BaseAccuracy;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte BaseAccuracy;
 
-    [MarshalAs(UnmanagedType.U4)] public int ApTotal;
+    [MarshalAs(UnmanagedType.U4)]
+    public int ApTotal;
 
-    [MarshalAs(UnmanagedType.U4)] public int ApCurrent;
+    [MarshalAs(UnmanagedType.U4)]
+    public int ApCurrent;
 
-    [MarshalAs(UnmanagedType.U4)] public int CurrentHp;
+    [MarshalAs(UnmanagedType.U4)]
+    public int CurrentHp;
 
-    [MarshalAs(UnmanagedType.U4)] public int CurrentMp;
+    [MarshalAs(UnmanagedType.U4)]
+    public int CurrentMp;
 
-    [MarshalAs(UnmanagedType.U4)] public int CurrentHpMax;
+    [MarshalAs(UnmanagedType.U4)]
+    public int CurrentHpMax;
 
-    [MarshalAs(UnmanagedType.U4)] public int CurrentMpMax;
+    [MarshalAs(UnmanagedType.U4)]
+    public int CurrentMpMax;
 
-    [MarshalAs(UnmanagedType.U1)] public byte InParty;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte InParty;
 
-    [MarshalAs(UnmanagedType.U1)] public byte EquippedWeapon;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte EquippedWeapon;
 
-    [MarshalAs(UnmanagedType.U1)] public byte EquippedArmor;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte EquippedArmor;
 
-    [MarshalAs(UnmanagedType.U1)] public byte CurrentStrength;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte CurrentStrength;
 
-    [MarshalAs(UnmanagedType.U1)] public byte CurrentDefense;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte CurrentDefense;
 
-    [MarshalAs(UnmanagedType.U1)] public byte CurrentMagic;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte CurrentMagic;
 
-    [MarshalAs(UnmanagedType.U1)] public byte CurrentMagicDefense;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte CurrentMagicDefense;
 
-    [MarshalAs(UnmanagedType.U1)] public byte CurrentAgility;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte CurrentAgility;
 
-    [MarshalAs(UnmanagedType.U1)] public byte CurrentLuck;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte CurrentLuck;
 
-    [MarshalAs(UnmanagedType.U1)] public byte CurrentEvasion;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte CurrentEvasion;
 
-    [MarshalAs(UnmanagedType.U1)] public byte CurrentAccuracy;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte CurrentAccuracy;
 
-    [MarshalAs(UnmanagedType.U1)] public byte PoisonDamage;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte PoisonDamage;
 
-    [MarshalAs(UnmanagedType.U1)] public byte OverdriveMode;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte OverdriveMode;
 
-    [MarshalAs(UnmanagedType.U1)] public byte OverdriveLevel;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte OverdriveLevel;
 
-    [MarshalAs(UnmanagedType.U1)] public byte OverdriveMax;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte OverdriveMax;
 
-    [MarshalAs(UnmanagedType.U1)] public byte SphereLevelCurrent;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte SphereLevelCurrent;
 
-    [MarshalAs(UnmanagedType.U1)] public byte SphereLevelTotal;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte SphereLevelTotal;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 13)] public byte[] SkillFlags;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 13)]
+    public byte[] SkillFlags;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public byte[] unknown_1;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+    public byte[] unknown_1;
 
-    [MarshalAs(UnmanagedType.U4)] public int TotalBattles;
+    [MarshalAs(UnmanagedType.U4)]
+    public int TotalBattles;
 
-    [MarshalAs(UnmanagedType.U4)] public int TotalKills;
+    [MarshalAs(UnmanagedType.U4)]
+    public int TotalKills;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)] public byte[] unknown_2;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+    public byte[] unknown_2;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveWarrior;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveWarrior;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveComrade;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveComrade;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveStoic;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveStoic;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveHealer;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveHealer;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveTactician;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveTactician;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveVictim;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveVictim;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveDancer;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveDancer;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveAvenger;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveAvenger;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveSlayer;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveSlayer;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveHero;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveHero;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveRook;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveRook;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveVictor;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveVictor;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveCoward;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveCoward;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveAlly;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveAlly;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveSufferer;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveSufferer;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveDaredevil;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveDaredevil;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveLoner;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveLoner;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveBlank1;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveBlank1;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveBlank2;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveBlank2;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort OverdriveAeonsOnly;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort OverdriveAeonsOnly;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)] public byte[] OverdriveModes;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+    public byte[] OverdriveModes;
 }

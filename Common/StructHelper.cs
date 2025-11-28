@@ -28,7 +28,9 @@ public static class StructHelper
             {
                 try
                 {
-                    var sizeConst = attribute.NamedArguments.FirstOrDefault(arg => arg.MemberName == "SizeConst");
+                    var sizeConst = attribute.NamedArguments.FirstOrDefault(arg =>
+                        arg.MemberName == "SizeConst"
+                    );
                     fieldSize = (int)sizeConst.TypedValue.Value;
                     break;
                 }

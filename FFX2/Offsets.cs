@@ -18,8 +18,8 @@ public enum OffsetType
     ItemCount = 0xA01050,
     RemoveHPLimit,
     RemoveMPLimit = 0x20E763, // B8 3F 42 0F 00 EB 16
-                              // FFX-2.exe+20E763 - B8 3F420F00           - mov eax,000F423F { 999999 }
-                              // FFX-2.exe+20E768 - EB 16                 - jmp FFX-2.exe+20E780
+    // FFX-2.exe+20E763 - B8 3F420F00           - mov eax,000F423F { 999999 }
+    // FFX-2.exe+20E768 - EB 16                 - jmp FFX-2.exe+20E780
 }
 
 public static class Offsets
@@ -74,13 +74,13 @@ public static class Offsets
         EXP100x = 0x9F78D6,
         Gil100x = 0x9F78D7,
         AlwaysOversoul = 0x9F78D9,
-        FirstAttack = 0x9F78E4 // 0xFF == OFF
+        FirstAttack = 0x9F78E4, // 0xFF == OFF
     }
 
     public enum Party
     {
         Yuna,
         Rikku,
-        Paine
+        Paine,
     }
 }

@@ -50,7 +50,10 @@ public partial class SphereGridEditor : UserControl
             return;
         }
 
-        SphereGrid.SetNodeType(this._currentNode, SphereGrid.NodeTypes[this.ComboNodeType.SelectedIndex].ID);
+        SphereGrid.SetNodeType(
+            this._currentNode,
+            SphereGrid.NodeTypes[this.ComboNodeType.SelectedIndex].ID
+        );
     }
 
     void SphereGridActivation_Changed(object sender, RoutedEventArgs e)

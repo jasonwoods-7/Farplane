@@ -32,7 +32,10 @@ public static class Cheats
         }
         else
         {
-            LegacyMemoryReader.WriteBytes(typeOffset, BitConverter.GetBytes((ushort)(item + 0x2000)));
+            LegacyMemoryReader.WriteBytes(
+                typeOffset,
+                BitConverter.GetBytes((ushort)(item + 0x2000))
+            );
             LegacyMemoryReader.WriteBytes(countOffset, [count]);
         }
     }
@@ -48,14 +51,19 @@ public static class Cheats
         }
         else
         {
-            LegacyMemoryReader.WriteBytes(typeOffset, BitConverter.GetBytes((ushort)(item + 0x9000)));
+            LegacyMemoryReader.WriteBytes(
+                typeOffset,
+                BitConverter.GetBytes((ushort)(item + 0x9000))
+            );
             LegacyMemoryReader.WriteBytes(countOffset, [count]);
         }
     }
 
     public static void GiveAllGrids()
     {
-        var allGridBytes = new byte[8].Select(gb => gb = 0xFF).ToArray();
+        var allGridBytes = new byte[8]
+            .Select(gb => gb = 0xFF)
+            .ToArray();
         LegacyMemoryReader.WriteBytes((int)OffsetType.KnownGarmentGrids, allGridBytes);
     }
 }

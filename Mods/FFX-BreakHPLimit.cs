@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Windows;
-
 using Farplane;
 using Farplane.Common;
 using Farplane.FarplaneMod;
@@ -18,12 +17,17 @@ public class FFXBreakHPLimit : IFarplaneMod
     private static int _offsetMPLimit = 0x3868BF;
     private static int _offsetHPCheck = 0x38D389;
     private static int _offsetMPCheck = 0x38E5FE;
-    public void Configure(object parentWindow)
-    {
 
+    public void Configure(object parentWindow) { }
+
+    public string ConfigButton
+    {
+        get { return null; }
     }
-    public string ConfigButton { get { return null; } }
-    public bool AutoActivate { get { return true; } }
+    public bool AutoActivate
+    {
+        get { return true; }
+    }
     public string Name
     {
         get { return "Break HP Limit"; }
@@ -46,35 +50,33 @@ public class FFXBreakHPLimit : IFarplaneMod
 
     public ModState GetState()
     {
-        if (_modActive) return ModState.Activated;
+        if (_modActive)
+            return ModState.Activated;
         return ModState.Deactivated;
     }
 
     public void Activate()
     {
-        if (_modActive) return;
+        if (_modActive)
+            return;
         ModLogger.WriteLine("Activating Break HP/MP Limit");
 
         // No check (yet)
         GameMemory.Assembly.Inject(_offsetHPCheck, "and eax,7FFFFFFF");
         GameMemory.Assembly.Inject(_offsetMPLimit, "mov eax,7FFFFFFF");
         GameMemory.Assembly.Inject(_offsetMPCheck, "push 7fffffff");
-        GameMemory.Assembly.Inject(_offsetHPCheck, new[]
-        {
-            "and eax, 7FFFFFFF",
-            "nop",
-            "nop",
-            "nop",
-            "nop",
-            "nop",
-        });
+        GameMemory.Assembly.Inject(
+            _offsetHPCheck,
+            new[] { "and eax, 7FFFFFFF", "nop", "nop", "nop", "nop", "nop" }
+        );
 
         _modActive = true;
     }
 
     public void Deactivate()
     {
-        if (!_modActive) return;
+        if (!_modActive)
+            return;
         ModLogger.WriteLine("Deactivating Break HP/MP Limit");
         ModLogger.WriteLine("Deactivation NYI");
         _modActive = false;

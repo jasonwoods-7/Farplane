@@ -42,7 +42,14 @@ public partial class ProcessSelectWindow : MetroWindow
 
         foreach (var process in processes)
         {
-            if (string.Compare(process.ProcessName, moduleName, StringComparison.CurrentCultureIgnoreCase) != 0 && !this.ButtonShowAll.IsChecked.Value)
+            if (
+                string.Compare(
+                    process.ProcessName,
+                    moduleName,
+                    StringComparison.CurrentCultureIgnoreCase
+                ) != 0
+                && !this.ButtonShowAll.IsChecked.Value
+            )
             {
                 continue;
             }
@@ -53,16 +60,17 @@ public partial class ProcessSelectWindow : MetroWindow
                 var icon = System.Drawing.Icon.ExtractAssociatedIcon(processFile);
 
                 ImageSource imageSource = Imaging.CreateBitmapSourceFromHIcon(
-        icon.Handle,
-        Int32Rect.Empty,
-        BitmapSizeOptions.FromEmptyOptions());
+                    icon.Handle,
+                    Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions()
+                );
 
                 var processItem = new ProcessListItem
                 {
                     ProcessIcon = imageSource,
                     ProcessID = process.Id,
                     ProcessName = process.ProcessName,
-                    Process = process
+                    Process = process,
                 };
 
                 this.ProcessList.Items.Add(processItem);
@@ -71,7 +79,6 @@ public partial class ProcessSelectWindow : MetroWindow
             {
                 continue;
             }
-
         }
         this._ready = true;
     }
@@ -98,7 +105,12 @@ public partial class ProcessSelectWindow : MetroWindow
 
     void Refresh_Click(object sender, RoutedEventArgs e) => this.RefreshList();
 
-    void RefreshList() => this.PopulateProcessList(this.ButtonShowAll.IsChecked != null && this.ButtonShowAll.IsChecked.Value ? string.Empty : this._moduleName);
+    void RefreshList() =>
+        this.PopulateProcessList(
+            this.ButtonShowAll.IsChecked != null && this.ButtonShowAll.IsChecked.Value
+                ? string.Empty
+                : this._moduleName
+        );
 
     void ShowAll_Click(object sender, RoutedEventArgs e)
     {

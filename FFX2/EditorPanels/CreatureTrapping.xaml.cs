@@ -21,6 +21,7 @@ public partial class CreatureTrapping : UserControl
     bool _comboShowing = false;
     readonly int _offsetCreatureTrap = (int)OffsetType.CreatureTrapBase;
     readonly int _offsetCreaturePods = (int)OffsetType.CreaturePodBase;
+
     public CreatureTrapping()
     {
         this.InitializeComponent();
@@ -130,8 +131,10 @@ public partial class CreatureTrapping : UserControl
 
     void SetTrap(int trapIndex, int creatureId)
     {
-        LegacyMemoryReader.WriteBytes(this._offsetCreatureTrap + (trapIndex * 4),
-            BitConverter.GetBytes((ushort)creatureId));
+        LegacyMemoryReader.WriteBytes(
+            this._offsetCreatureTrap + (trapIndex * 4),
+            BitConverter.GetBytes((ushort)creatureId)
+        );
         this.Refresh();
     }
 
@@ -139,11 +142,7 @@ public partial class CreatureTrapping : UserControl
     {
         this.Refresh();
         var trapId = int.Parse(button.Name.Substring(4));
-        var inputBox = new TextBox
-        {
-            Text = defaultText,
-            ContextMenu = null
-        };
+        var inputBox = new TextBox { Text = defaultText, ContextMenu = null };
         button.Content = inputBox;
         button.KeyDown += (sender, args) =>
         {
@@ -157,8 +156,12 @@ public partial class CreatureTrapping : UserControl
                 return;
             }
 
-            var parsed = int.TryParse(inputBox.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture,
-                out var newId);
+            var parsed = int.TryParse(
+                inputBox.Text,
+                NumberStyles.HexNumber,
+                CultureInfo.InvariantCulture,
+                out var newId
+            );
             if (parsed)
             {
                 this.SetTrap(trapId, newId);
@@ -168,7 +171,6 @@ public partial class CreatureTrapping : UserControl
                 MessageBox.Show("Please enter a creature ID in hex!");
                 return;
             }
-
         };
         button.UpdateLayout();
         inputBox.SelectionStart = 0;
@@ -193,7 +195,10 @@ public partial class CreatureTrapping : UserControl
             creatureSearchList.Add($"{creature.ID:X4} {creature.Name}");
         }
 
-        var creatureSearch = new SearchDialog(creatureSearchList) { Owner = this.TryFindParent<Window>() };
+        var creatureSearch = new SearchDialog(creatureSearchList)
+        {
+            Owner = this.TryFindParent<Window>(),
+        };
         creatureSearch.ShowDialog();
 
         if (creatureSearch.DialogResult == false)
@@ -228,15 +233,9 @@ public partial class CreatureTrapping : UserControl
         this._comboShowing = true;
         var trapCombo = new ComboBox
         {
-            ItemsSource = new string[]
-            {
-                "S",
-                "M",
-                "L",
-                "SP"
-            },
+            ItemsSource = new string[] { "S", "M", "L", "SP" },
             Width = 48,
-            SelectedIndex = 0
+            SelectedIndex = 0,
         };
 
         trapCombo.KeyDown += (sender, args) =>

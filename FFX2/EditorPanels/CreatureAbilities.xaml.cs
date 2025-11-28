@@ -29,7 +29,10 @@ public partial class CreatureAbilities : UserControl
 
     public void Refresh()
     {
-        var creatureBytes = LegacyMemoryReader.ReadBytes(this._abilityOffset + (this._creatureIndex * 0xE38), 0x16);
+        var creatureBytes = LegacyMemoryReader.ReadBytes(
+            this._abilityOffset + (this._creatureIndex * 0xE38),
+            0x16
+        );
 
         // Refresh commands
         for (var commandSlot = 0; commandSlot < 8; commandSlot++)
@@ -57,9 +60,7 @@ public partial class CreatureAbilities : UserControl
                     var auto = AutoAbilities.GetAutoAbility(commandId);
                     this.SetAutoAbilityText(commandButton, auto);
                 }
-
             }
-
         }
     }
 
@@ -84,7 +85,10 @@ public partial class CreatureAbilities : UserControl
         }
 
         var currentCmd = this.ReadAbility(commandIndex);
-        var commandDialog = new SearchDialog(textList, currentCmd.ToString("X2")) { Owner = this.TryFindParent<Window>() };
+        var commandDialog = new SearchDialog(textList, currentCmd.ToString("X2"))
+        {
+            Owner = this.TryFindParent<Window>(),
+        };
 
         commandDialog.ShowDialog();
         if (commandDialog.DialogResult.HasValue && !commandDialog.DialogResult.Value)
@@ -103,20 +107,23 @@ public partial class CreatureAbilities : UserControl
             var searchCommand = searchList[searchIndex];
             this.WriteAbility(commandIndex, searchCommand.ID);
         }
-
     }
 
     void WriteAbility(int index, int abilityId)
     {
         LegacyMemoryReader.WriteBytes(
             this._abilityOffset + (this._creatureIndex * 0xE38) + (index * 2),
-            BitConverter.GetBytes((ushort)abilityId));
+            BitConverter.GetBytes((ushort)abilityId)
+        );
         this.Refresh();
     }
 
     ushort ReadAbility(int index)
     {
-        var creatureBytes = LegacyMemoryReader.ReadBytes(this._abilityOffset + (this._creatureIndex * 0xE38), 0x16);
+        var creatureBytes = LegacyMemoryReader.ReadBytes(
+            this._abilityOffset + (this._creatureIndex * 0xE38),
+            0x16
+        );
         var abilityId = BitConverter.ToUInt16(creatureBytes, index * 2);
         return abilityId;
     }
@@ -125,7 +132,13 @@ public partial class CreatureAbilities : UserControl
     {
         this.Refresh();
 
-        var inputBox = new TextBox { Text = defaultText, SelectionStart = 0, SelectionLength = defaultText.Length, ContextMenu = null };
+        var inputBox = new TextBox
+        {
+            Text = defaultText,
+            SelectionStart = 0,
+            SelectionLength = defaultText.Length,
+            ContextMenu = null,
+        };
         button.Content = inputBox;
         button.UpdateLayout();
         inputBox.Focus();
@@ -147,7 +160,12 @@ public partial class CreatureAbilities : UserControl
             var commandIndex = int.Parse(button.Name.Substring(7));
             var commandId = -1;
 
-            var foundId = int.TryParse(inputBox.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out commandId);
+            var foundId = int.TryParse(
+                inputBox.Text,
+                NumberStyles.HexNumber,
+                CultureInfo.InvariantCulture,
+                out commandId
+            );
 
             if (!foundId)
             {
@@ -188,12 +206,26 @@ public partial class CreatureAbilities : UserControl
 
         foreach (var command in Commands.CommandList)
         {
-            searchList.Add(new AbilitySearchItem { ID = command.ID, Name = command.Name, Type = AbilitySearchItem.AbilityType.Command });
+            searchList.Add(
+                new AbilitySearchItem
+                {
+                    ID = command.ID,
+                    Name = command.Name,
+                    Type = AbilitySearchItem.AbilityType.Command,
+                }
+            );
         }
 
         foreach (var command in AutoAbilities.AutoAbilityList)
         {
-            searchList.Add(new AbilitySearchItem { ID = command.ID, Name = command.Name, Type = AbilitySearchItem.AbilityType.AutoAbility });
+            searchList.Add(
+                new AbilitySearchItem
+                {
+                    ID = command.ID,
+                    Name = command.Name,
+                    Type = AbilitySearchItem.AbilityType.AutoAbility,
+                }
+            );
         }
 
         return searchList;
@@ -213,8 +245,9 @@ public partial class CreatureAbilities : UserControl
         }
 
         var buttonIndex = int.Parse(senderButton.Name.Substring(7));
-        var abilityId =
-            LegacyMemoryReader.ReadInt16(this._abilityOffset + (0xE38 * this._creatureIndex) + (2 * buttonIndex));
+        var abilityId = LegacyMemoryReader.ReadInt16(
+            this._abilityOffset + (0xE38 * this._creatureIndex) + (2 * buttonIndex)
+        );
         this.ShowButtonBox(senderButton, abilityId.ToString("X2"));
     }
 
@@ -227,7 +260,7 @@ public partial class CreatureAbilities : UserControl
         public enum AbilityType
         {
             Command,
-            AutoAbility
+            AutoAbility,
         }
     }
 }

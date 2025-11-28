@@ -16,7 +16,8 @@ public static class Blitzball
 
     public static BlitzballData ReadBlitzballData(bool dumpBytes = false)
     {
-        var offsetOfPrizes = (int)Marshal.OffsetOf<BlitzballData>(nameof(BlitzballData.BlitzballPrizes));
+        var offsetOfPrizes = (int)
+            Marshal.OffsetOf<BlitzballData>(nameof(BlitzballData.BlitzballPrizes));
         var blitzBytes = GameMemory.Read<byte>(_dataPointer, _blitzDataSize, false);
 
         if (dumpBytes)
@@ -163,31 +164,44 @@ public class BlitzballPlayer
 [StructLayout(LayoutKind.Sequential, Pack = 0, Size = 2080)]
 public struct BlitzballData
 {
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)] public int[] AbilityFlags1;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)]
+    public int[] AbilityFlags1;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)] public int[] AbilityFlags2;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)]
+    public int[] AbilityFlags2;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 134)] public byte[] unknown_0;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 134)]
+    public byte[] unknown_0;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 300)] public byte[] TechsEquipped;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 300)]
+    public byte[] TechsEquipped;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)] public byte[] TechsAvailable;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)]
+    public byte[] TechsAvailable;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)] public byte[] PlayerLevels;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)]
+    public byte[] PlayerLevels;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)] public byte[] unknown_2;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
+    public byte[] unknown_2;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 48)] public byte[] TeamData;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 48)]
+    public byte[] TeamData;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 27)] public byte[] unknown_3;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 27)]
+    public byte[] unknown_3;
 
-    [MarshalAs(UnmanagedType.U1)] public byte LeagueStatus;
+    [MarshalAs(UnmanagedType.U1)]
+    public byte LeagueStatus;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public byte[] LeagueMatchups;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+    public byte[] LeagueMatchups;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public byte[] TournamentMatchups;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+    public byte[] TournamentMatchups;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)] public byte[] TournamentWinners;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+    public byte[] TournamentWinners;
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
     public byte[] TeamLeagueWins;
@@ -195,7 +209,8 @@ public struct BlitzballData
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
     public byte[] TeamLeagueLosses;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 45)] public byte[] unknown_7;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 45)]
+    public byte[] unknown_7;
 
     public byte TournamentStatus;
 
@@ -203,21 +218,30 @@ public struct BlitzballData
 
     public byte GoalCount;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 100)] public byte[] GoalScorers;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 100)]
+    public byte[] GoalScorers;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)] public byte[] unknown_4;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
+    public byte[] unknown_4;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)] public byte[] PlayerContracts;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)]
+    public byte[] PlayerContracts;
 
-    [MarshalAs(UnmanagedType.U2)] public ushort TeamWins;
+    [MarshalAs(UnmanagedType.U2)]
+    public ushort TeamWins;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)] public ushort[] PlayerExperience;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)]
+    public ushort[] PlayerExperience;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 192)] public byte[] unknown_5;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 192)]
+    public byte[] unknown_5;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 248)] public byte[] unknown_6;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 248)]
+    public byte[] unknown_6;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)] public ushort[] PlayerSalary;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 60)]
+    public ushort[] PlayerSalary;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)] public ushort[] BlitzballPrizes;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+    public ushort[] BlitzballPrizes;
 }

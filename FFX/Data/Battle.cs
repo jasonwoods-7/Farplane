@@ -5,8 +5,12 @@ namespace Farplane.FFX.Data;
 
 public static class Battle
 {
-    static readonly int _offsetEnemyPointer = OffsetScanner.GetOffset(GameOffset.FFX_BattlePointerEnemy);
-    static readonly int _offsetPartyPointer = OffsetScanner.GetOffset(GameOffset.FFX_BattlePointerParty);
+    static readonly int _offsetEnemyPointer = OffsetScanner.GetOffset(
+        GameOffset.FFX_BattlePointerEnemy
+    );
+    static readonly int _offsetPartyPointer = OffsetScanner.GetOffset(
+        GameOffset.FFX_BattlePointerParty
+    );
 
     public const int BlockLengthEntity = 0xF90;
 
@@ -28,5 +32,4 @@ public static class Battle
 
         return entityData;
     }
-
 }

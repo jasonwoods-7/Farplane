@@ -23,10 +23,13 @@ public partial class BlitzballPlayerEditor : UserControl
     int _playerIndex = 0;
     BlitzballPlayer[] _players;
     readonly ButtonGrid _buttons = new(3, BlitzballValues.Techs.Length);
-    static readonly Tuple<AppTheme, Accent> currentStyle = ThemeManager.DetectAppStyle(Application.Current);
+    static readonly Tuple<AppTheme, Accent> currentStyle = ThemeManager.DetectAppStyle(
+        Application.Current
+    );
 
-    readonly Brush _trueBrush =
-        new SolidColorBrush((Color)currentStyle.Item1.Resources["BlackColor"]);
+    readonly Brush _trueBrush = new SolidColorBrush(
+        (Color)currentStyle.Item1.Resources["BlackColor"]
+    );
 
     readonly Brush _falseBrush = new SolidColorBrush((Color)currentStyle.Item1.Resources["Gray2"]);
 
@@ -122,7 +125,8 @@ public partial class BlitzballPlayerEditor : UserControl
         for (var i = 0; i < 5; i++)
         {
             var techButton = (Button)this.FindName("EquippedTech" + (i + 1).ToString().Trim());
-            techButton.Visibility = i >= player.TechCapacity ? Visibility.Collapsed : Visibility.Visible;
+            techButton.Visibility =
+                i >= player.TechCapacity ? Visibility.Collapsed : Visibility.Visible;
 
             var tech = BlitzballValues.Techs.FirstOrDefault(t => t.Index == techData[i]);
             if (techData[i] == 0)
@@ -177,7 +181,10 @@ public partial class BlitzballPlayerEditor : UserControl
         this._refresh = false;
     }
 
-    void TreeBlitzPlayers_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    void TreeBlitzPlayers_OnSelectedItemChanged(
+        object sender,
+        RoutedPropertyChangedEventArgs<object> e
+    )
     {
         if (this._refresh)
         {
@@ -208,9 +215,12 @@ public partial class BlitzballPlayerEditor : UserControl
     {
         var techIndex = int.Parse((sender as Button).Name.Substring(12)) - 1;
         var techNames = BlitzballValues.Techs.Select(t => t.Name);
-        var searchDialog = new SearchDialog(techNames.ToList(), (sender as Button).Content.ToString())
+        var searchDialog = new SearchDialog(
+            techNames.ToList(),
+            (sender as Button).Content.ToString()
+        )
         {
-            Owner = this.TryFindParent<Window>()
+            Owner = this.TryFindParent<Window>(),
         };
         var success = searchDialog.ShowDialog();
 
@@ -305,7 +315,9 @@ public partial class BlitzballPlayerEditor : UserControl
         this.RefreshCurrentPlayer();
     }
 
-    void TextTournamentGoals_OnKeyDown(object sender, KeyEventArgs e) => throw new NotImplementedException();
+    void TextTournamentGoals_OnKeyDown(object sender, KeyEventArgs e) =>
+        throw new NotImplementedException();
 
-    void TextLeagueGoals_OnKeyDown(object sender, KeyEventArgs e) => throw new NotImplementedException();
+    void TextLeagueGoals_OnKeyDown(object sender, KeyEventArgs e) =>
+        throw new NotImplementedException();
 }

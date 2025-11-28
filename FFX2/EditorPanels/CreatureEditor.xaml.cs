@@ -42,10 +42,14 @@ public partial class CreatureEditor : UserControl
     public void Refresh()
     {
         this._refreshing = true;
-        var nameBytes = LegacyMemoryReader.ReadBytes(this._offsetCreatureName + (this._creatureIndex * 40), 18);
+        var nameBytes = LegacyMemoryReader.ReadBytes(
+            this._offsetCreatureName + (this._creatureIndex * 40),
+            18
+        );
         var name = StringConverter.ToASCII(nameBytes);
         this.CreatureName.Text = name;
-        this.CreatureSize.SelectedIndex = GameMemory.Read<byte>(this._statsOffset + (int)Offsets.StatOffsets.Size) - 1;
+        this.CreatureSize.SelectedIndex =
+            GameMemory.Read<byte>(this._statsOffset + (int)Offsets.StatOffsets.Size) - 1;
         this._statsPanel.Refresh(this._creatureIndex + 15);
         this._creatureAbilities.Refresh();
         this._refreshing = false;
@@ -61,7 +65,10 @@ public partial class CreatureEditor : UserControl
         var nameBytes = StringConverter.ToFFX(this.CreatureName.Text);
         var writeBytes = new byte[18];
         nameBytes.CopyTo(writeBytes, 0);
-        LegacyMemoryReader.WriteBytes(this._offsetCreatureName + (this._creatureIndex * 40), writeBytes);
+        LegacyMemoryReader.WriteBytes(
+            this._offsetCreatureName + (this._creatureIndex * 40),
+            writeBytes
+        );
         this.Refresh();
     }
 
@@ -72,7 +79,9 @@ public partial class CreatureEditor : UserControl
             return;
         }
 
-        LegacyMemoryReader.WriteBytes(this._statsOffset + (int)Offsets.StatOffsets.Size,
-            [(byte)(this.CreatureSize.SelectedIndex + 1)]);
+        LegacyMemoryReader.WriteBytes(
+            this._statsOffset + (int)Offsets.StatOffsets.Size,
+            [(byte)(this.CreatureSize.SelectedIndex + 1)]
+        );
     }
 }

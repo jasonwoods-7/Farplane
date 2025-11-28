@@ -27,7 +27,7 @@ public partial class CreaturePanel : UserControl
             {
                 Name = "Creature" + i,
                 Header = "Creature " + i,
-                Content = this._editors[i]
+                Content = this._editors[i],
             };
             ControlsHelper.SetHeaderFontSize(tabCreature, 12);
             this.TabCreatures.Items.Add(tabCreature);

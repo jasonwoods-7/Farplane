@@ -175,7 +175,7 @@ public static class EquipName
             "Buckler",
             "Buckler",
             "Buckler",
-            "-"
+            "-",
         ],
         [
             "Nirvana",
@@ -348,10 +348,9 @@ public static class EquipName
             "Ring",
             "Ring",
             "Ring",
-            "-"
+            "-",
         ],
         [
-
             "Masamune",
             "Dull Blade",
             "Beastmaster",
@@ -522,7 +521,7 @@ public static class EquipName
             "Bracer",
             "Bracer",
             "Bracer",
-            "-"
+            "-",
         ],
         [
             "Spirit Lance",
@@ -695,7 +694,7 @@ public static class EquipName
             "Armlet",
             "Armlet",
             "Armlet",
-            "-"
+            "-",
         ],
         [
             "World Champion",
@@ -868,7 +867,7 @@ public static class EquipName
             "Armguard",
             "Armguard",
             "Armguard",
-            "-"
+            "-",
         ],
         [
             "Onion Knight",
@@ -1041,10 +1040,9 @@ public static class EquipName
             "Bangle",
             "Bangle",
             "Bangle",
-            "-"
+            "-",
         ],
         [
-
             "Godhand",
             "Claw",
             "Iron Grip",

@@ -106,7 +106,10 @@ public partial class BlitzballTeamEditor : UserControl
 
         var playerNames = BlitzballValues.Players.Select(player => player.Name);
 
-        var playerSearchDialog = new SearchDialog(playerNames.ToList()) { Owner = this.TryFindParent<Window>() };
+        var playerSearchDialog = new SearchDialog(playerNames.ToList())
+        {
+            Owner = this.TryFindParent<Window>(),
+        };
 
         var search = playerSearchDialog.ShowDialog();
         if (!search.Value)
@@ -185,19 +188,30 @@ public partial class BlitzballTeamEditor : UserControl
                 // Team too small to remove player, return error
                 MessageBox.Show(
                     string.Format(
-                        "{0} is already assigned to the {1}, but could not be removed as the {1} must have at least 6 players.\n\n" +
-                        "Remove {0} from the {1} or add another player before trying again.",
-                        player.Name, sourceTeam.Name),
-                    "Unable to assign player", MessageBoxButton.OK, MessageBoxImage.Error);
+                        "{0} is already assigned to the {1}, but could not be removed as the {1} must have at least 6 players.\n\n"
+                            + "Remove {0} from the {1} or add another player before trying again.",
+                        player.Name,
+                        sourceTeam.Name
+                    ),
+                    "Unable to assign player",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
                 return;
             }
 
             // Player is in a team, prompt user
-            var movePlayer =
-                MessageBox.Show(
-                    string.Format("{0} is already in the {1}. Press OK to move {0} to the {2}", player.Name, sourceTeam.Name,
-                        destTeam.Name), "Player already assigned",
-                    MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            var movePlayer = MessageBox.Show(
+                string.Format(
+                    "{0} is already in the {1}. Press OK to move {0} to the {2}",
+                    player.Name,
+                    sourceTeam.Name,
+                    destTeam.Name
+                ),
+                "Player already assigned",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Warning
+            );
             if (movePlayer != MessageBoxResult.OK)
             {
                 return;
@@ -210,8 +224,8 @@ public partial class BlitzballTeamEditor : UserControl
 
             for (var i = playerPos; i < 7; i++)
             {
-                sourceTeamData[i] = sourceTeamData[i + 1];    // Move other players up one position
-                sourceTeamData[7] = 0x3C;                   // Empty final slot
+                sourceTeamData[i] = sourceTeamData[i + 1]; // Move other players up one position
+                sourceTeamData[7] = 0x3C; // Empty final slot
             }
 
             // Copy updated roster back to blitz data

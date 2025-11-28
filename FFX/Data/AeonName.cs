@@ -33,17 +33,5 @@ public class AeonName
         return StringConverter.ToASCII(nameBytes);
     }
 
-    public static int[] AeonNames =>
-    [
-        0x00,
-        0x14,
-        0x28,
-        0x3C,
-        0x50,
-        0x64,
-        0x78,
-        0x8C,
-        0xA0,
-        0xB4,
-    ];
+    public static int[] AeonNames => [0x00, 0x14, 0x28, 0x3C, 0x50, 0x64, 0x78, 0x8C, 0xA0, 0xB4];
 }

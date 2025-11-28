@@ -44,13 +44,20 @@ public partial class DressphereEditor : UserControl
                 var parsed = int.TryParse(dressBox.Text, out quantity);
                 if (parsed && quantity <= 127 && quantity >= 0)
                 {
-                    LegacyMemoryReader.WriteBytes(this._offsetDresspheres + dressIndex,
-                        [(byte)quantity]);
+                    LegacyMemoryReader.WriteBytes(
+                        this._offsetDresspheres + dressIndex,
+                        [(byte)quantity]
+                    );
                     this.Refresh();
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a number between 0 and 127.", "Value input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(
+                        "Please enter a number between 0 and 127.",
+                        "Value input error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
                 }
                 break;
             case Key.Escape:

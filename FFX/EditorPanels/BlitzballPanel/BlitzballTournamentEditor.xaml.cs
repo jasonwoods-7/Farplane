@@ -21,8 +21,15 @@ public partial class BlitzballTournamentEditor : UserControl
         this.InitializeComponent();
 
         this._refresh = true;
-        this.ComboTournamentStatus.ItemsSource = BlitzballValues.TournamentStates.Select(state => state.Name);
-        foreach (var teamCombo in this.FindChildren<ComboBox>().Where(child => child.Name.StartsWith("ComboWinner") || child.Name.StartsWith("ComboTeam")))
+        this.ComboTournamentStatus.ItemsSource = BlitzballValues.TournamentStates.Select(state =>
+            state.Name
+        );
+        foreach (
+            var teamCombo in this.FindChildren<ComboBox>()
+                .Where(child =>
+                    child.Name.StartsWith("ComboWinner") || child.Name.StartsWith("ComboTeam")
+                )
+        )
         {
             teamCombo.ItemsSource = BlitzballValues.Teams.Select(team => team.Name);
         }
@@ -37,8 +44,12 @@ public partial class BlitzballTournamentEditor : UserControl
         var blitzData = Blitzball.ReadBlitzballData();
 
         // Tournament status
-        var tournamentStatusIndex =
-            Array.IndexOf(BlitzballValues.TournamentStates, BlitzballValues.TournamentStates.First(state => state.Index == blitzData.TournamentStatus));
+        var tournamentStatusIndex = Array.IndexOf(
+            BlitzballValues.TournamentStates,
+            BlitzballValues.TournamentStates.First(state =>
+                state.Index == blitzData.TournamentStatus
+            )
+        );
 
         this.ComboTournamentStatus.SelectedIndex = tournamentStatusIndex;
 
@@ -50,7 +61,9 @@ public partial class BlitzballTournamentEditor : UserControl
                 continue;
             }
 
-            var currentPrize = prizes.FirstOrDefault(prize => prize.Index == blitzData.BlitzballPrizes[i]);
+            var currentPrize = prizes.FirstOrDefault(prize =>
+                prize.Index == blitzData.BlitzballPrizes[i]
+            );
             if (currentPrize != null)
             {
                 prizeButton.Content = currentPrize.Name;
@@ -69,7 +82,9 @@ public partial class BlitzballTournamentEditor : UserControl
                 continue;
             }
 
-            var currentTeam = BlitzballValues.Teams.First(team => team.Index == blitzData.TournamentMatchups[i]);
+            var currentTeam = BlitzballValues.Teams.First(team =>
+                team.Index == blitzData.TournamentMatchups[i]
+            );
             comboTeam.SelectedIndex = Array.IndexOf(BlitzballValues.Teams, currentTeam);
         }
 
@@ -81,7 +96,9 @@ public partial class BlitzballTournamentEditor : UserControl
                 continue;
             }
 
-            var currentTeam = BlitzballValues.Teams.First(team => team.Index == blitzData.TournamentWinners[i]);
+            var currentTeam = BlitzballValues.Teams.First(team =>
+                team.Index == blitzData.TournamentWinners[i]
+            );
             comboTeam.SelectedIndex = Array.IndexOf(BlitzballValues.Teams, currentTeam);
         }
         this._refresh = false;
@@ -90,7 +107,11 @@ public partial class BlitzballTournamentEditor : UserControl
     void Prize_OnClick(object sender, RoutedEventArgs e)
     {
         var prizeButton = sender as Button;
-        var prizeDialog = new SearchDialog(BlitzballValues.Prizes.Select(prize => prize.Name).ToList(), string.Empty, false);
+        var prizeDialog = new SearchDialog(
+            BlitzballValues.Prizes.Select(prize => prize.Name).ToList(),
+            string.Empty,
+            false
+        );
         var dialogResult = prizeDialog.ShowDialog();
         if (dialogResult == false)
         {

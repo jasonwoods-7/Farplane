@@ -14,7 +14,7 @@ public static class Skills
         _offsetSkillTable = GameMemory.Read<int>(skillTablePointer, false);
     }
 
-    static void LoadTable() => _skillTable = new KernelTable(_offsetSkillTable);//_skillTable = new KernelTable("D:\\Games\\Steam\\SteamApps\\common\\FINAL FANTASY FFX&FFX-2 HD Remaster\\data\\ffx_data_VBF\\ffx_ps2\\ffx\\master\\new_uspc\\battle\\kernel\\sphere.bin");
+    static void LoadTable() => _skillTable = new KernelTable(_offsetSkillTable); //_skillTable = new KernelTable("D:\\Games\\Steam\\SteamApps\\common\\FINAL FANTASY FFX&FFX-2 HD Remaster\\data\\ffx_data_VBF\\ffx_ps2\\ffx\\master\\new_uspc\\battle\\kernel\\sphere.bin");
 
     public static List<string> GetSkillNames()
     {
@@ -36,6 +36,7 @@ public static class Skills
     }
 
     public static string GetSkillName(int skillIndex) => _skillTable.GetString1(skillIndex);
+
     public static string GetSkillDescription(int skillIndex) => _skillTable.GetString2(skillIndex);
 }
 

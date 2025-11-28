@@ -56,7 +56,8 @@ public static class Equipment
         {
             var ptrEquipmentData = Marshal.AllocHGlobal(dataLength);
             Marshal.Copy(dataBytes, i * BlockLength, ptrEquipmentData, BlockLength);
-            readItems[i] = (EquipmentItem)Marshal.PtrToStructure(ptrEquipmentData, typeof(EquipmentItem));
+            readItems[i] = (EquipmentItem)
+                Marshal.PtrToStructure(ptrEquipmentData, typeof(EquipmentItem));
             Marshal.FreeHGlobal(ptrEquipmentData);
         }
 

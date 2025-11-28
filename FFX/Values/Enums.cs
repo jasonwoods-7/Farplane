@@ -20,5 +20,5 @@ public enum Character
     Cindy,
     Sandy,
     Mindy,
-    None = 0xFF
+    None = 0xFF,
 }

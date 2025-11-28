@@ -13,7 +13,6 @@ namespace Farplane.FFX.EditorPanels.PartyPanel;
 /// </summary>
 public partial class PartyStats : UserControl
 {
-
     readonly int _offsetPartyStats = OffsetScanner.GetOffset(GameOffset.FFX_PartyStatBase);
     readonly int _blockSize = Marshal.SizeOf<PartyMember>();
     int _characterIndex;
@@ -89,75 +88,109 @@ public partial class PartyStats : UserControl
             switch (textBox.Name)
             {
                 case "TextTotalAP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.ApTotal)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.ApTotal))
+                        + charOffset;
                     GameMemory.Write(offset, uint.Parse(this.TextTotalAP.Text), false);
                     break;
                 case "TextCurrentAP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.ApCurrent)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.ApCurrent))
+                        + charOffset;
                     GameMemory.Write(offset, uint.Parse(this.TextCurrentAP.Text), false);
                     break;
                 case "TextMaxHP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.CurrentHpMax)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.CurrentHpMax))
+                        + charOffset;
                     GameMemory.Write(offset, uint.Parse(this.TextMaxHP.Text), false);
                     break;
                 case "TextMaxMP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.CurrentMpMax)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.CurrentMpMax))
+                        + charOffset;
                     GameMemory.Write(offset, uint.Parse(this.TextMaxMP.Text), false);
                     break;
                 case "TextCurrentHP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.CurrentHp)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.CurrentHp))
+                        + charOffset;
                     GameMemory.Write(offset, uint.Parse(this.TextCurrentHP.Text), false);
                     break;
                 case "TextCurrentMP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.CurrentMp)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.CurrentMp))
+                        + charOffset;
                     GameMemory.Write(offset, uint.Parse(this.TextCurrentMP.Text), false);
                     break;
                 case "TextBaseHP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseHp)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseHp)) + charOffset;
                     GameMemory.Write(offset, uint.Parse(this.TextBaseHP.Text), false);
                     break;
                 case "TextBaseMP":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMp)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMp)) + charOffset;
                     GameMemory.Write(offset, uint.Parse(this.TextBaseMP.Text), false);
                     break;
                 case "TextSphereLevelCurrent":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.SphereLevelCurrent)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.SphereLevelCurrent))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextSphereLevelCurrent.Text), false);
                     break;
                 case "TextSphereLevelTotal":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.SphereLevelTotal)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.SphereLevelTotal))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextSphereLevelTotal.Text), false);
                     break;
                 case "TextBaseStrength":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseStrength)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseStrength))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextBaseStrength.Text), false);
                     break;
                 case "TextBaseDefense":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseDefense)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseDefense))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextBaseDefense.Text), false);
                     break;
                 case "TextBaseMagic":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMagic)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMagic))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextBaseMagic.Text), false);
                     break;
                 case "TextBaseMagicDef":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMagicDefense)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseMagicDefense))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextBaseMagicDef.Text), false);
                     break;
                 case "TextBaseAgility":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseAgility)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseAgility))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextBaseAgility.Text), false);
                     break;
                 case "TextBaseLuck":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseLuck)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseLuck))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextBaseLuck.Text), false);
                     break;
                 case "TextBaseEvasion":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseEvasion)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseEvasion))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextBaseEvasion.Text), false);
                     break;
                 case "TextBaseAccuracy":
-                    offset = (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseAccuracy)) + charOffset;
+                    offset =
+                        (int)Marshal.OffsetOf<PartyMember>(nameof(PartyMember.BaseAccuracy))
+                        + charOffset;
                     GameMemory.Write(offset, byte.Parse(this.TextBaseAccuracy.Text), false);
                     break;
             }
@@ -165,8 +198,12 @@ public partial class PartyStats : UserControl
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"An error occurred:\n{ex.Message}", "Error parsing input", MessageBoxButton.OK,
-                MessageBoxImage.Error);
+            MessageBox.Show(
+                $"An error occurred:\n{ex.Message}",
+                "Error parsing input",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
             return;
         }
     }

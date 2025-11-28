@@ -38,7 +38,7 @@ public partial class EquipmentPanel : UserControl
         new BitmapImage(new Uri("pack://application:,,,/FFX/Resources/MenuIcons/equip_5_0.png")),
         new BitmapImage(new Uri("pack://application:,,,/FFX/Resources/MenuIcons/equip_5_1.png")),
         new BitmapImage(new Uri("pack://application:,,,/FFX/Resources/MenuIcons/equip_6_0.png")),
-        new BitmapImage(new Uri("pack://application:,,,/FFX/Resources/MenuIcons/equip_6_1.png"))
+        new BitmapImage(new Uri("pack://application:,,,/FFX/Resources/MenuIcons/equip_6_1.png")),
     ];
 
     EquipmentItem _currentItem;
@@ -55,7 +55,11 @@ public partial class EquipmentPanel : UserControl
             this.ComboEquipmentCharacter.Items.Add((Character)charaIndex);
         }
 
-        for (var formulaIndex = 0; formulaIndex < DamageFormula.DamageFormulas.Length; formulaIndex++)
+        for (
+            var formulaIndex = 0;
+            formulaIndex < DamageFormula.DamageFormulas.Length;
+            formulaIndex++
+        )
         {
             this.ComboDamageFormula.Items.Add(DamageFormula.DamageFormulas[formulaIndex].Name);
         }
@@ -71,10 +75,23 @@ public partial class EquipmentPanel : UserControl
 
         for (var equipmentSlot = 0; equipmentSlot < Equipment.MaxItems; equipmentSlot++)
         {
-            var imageIcon = new Image { Width = 24, Height = 24, Name = "ImageIcon" };
-            var textName = new TextBlock { VerticalAlignment = VerticalAlignment.Center, Name = "TextName" };
+            var imageIcon = new Image
+            {
+                Width = 24,
+                Height = 24,
+                Name = "ImageIcon",
+            };
+            var textName = new TextBlock
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                Name = "TextName",
+            };
 
-            var panelItem = new DockPanel { Children = { imageIcon, textName }, Margin = new Thickness(0) };
+            var panelItem = new DockPanel
+            {
+                Children = { imageIcon, textName },
+                Margin = new Thickness(0),
+            };
             var listItem = new ListViewItem { Content = panelItem };
 
             var currentItem = items[equipmentSlot];
@@ -120,8 +137,10 @@ public partial class EquipmentPanel : UserControl
 
         this._currentItem = Equipment.ReadItem(this._selectedItem);
 
-        if ((this._selectedItem >= 0x0C && this._selectedItem <= 0x21) ||
-            this._currentItem.SlotOccupied == 0)
+        if (
+            (this._selectedItem >= 0x0C && this._selectedItem <= 0x21)
+            || this._currentItem.SlotOccupied == 0
+        )
         {
             this.ButtonDeleteItem.IsEnabled = false;
         }
@@ -147,10 +166,14 @@ public partial class EquipmentPanel : UserControl
 
         if (this._currentItem.Character < 7)
         {
-            var nameString = EquipName.EquipNames[this._currentItem.Character][this._currentItem.Name];
+            var nameString = EquipName.EquipNames[this._currentItem.Character][
+                this._currentItem.Name
+            ];
 
             listText.Text = nameString;
-            imageIcon.Source = this._icons[(this._currentItem.Character * 2) + this._currentItem.Type];
+            imageIcon.Source = this._icons[
+                (this._currentItem.Character * 2) + this._currentItem.Type
+            ];
 
             this.ButtonEquipmentName.Content = nameString;
             this.GroupEquipmentEditor.Header = nameString;
@@ -166,7 +189,9 @@ public partial class EquipmentPanel : UserControl
             this.GroupEquipmentEditor.Header = NameUnknown;
         }
 
-        var appearance = EquipAppearance.EquipAppearances.FirstOrDefault(e => e.ID == this._currentItem.Appearance);
+        var appearance = EquipAppearance.EquipAppearances.FirstOrDefault(e =>
+            e.ID == this._currentItem.Appearance
+        );
         if (appearance == null)
         {
             this.ButtonEquipmentAppearance.Content = NameUnknown;
@@ -179,7 +204,9 @@ public partial class EquipmentPanel : UserControl
         this.ComboEquipmentCharacter.SelectedIndex = this._currentItem.Character;
         this.ComboEquipmentType.SelectedIndex = this._currentItem.Type;
 
-        var damageFormula = DamageFormula.DamageFormulas.FirstOrDefault(f => f.ID == this._currentItem.DamageFormula);
+        var damageFormula = DamageFormula.DamageFormulas.FirstOrDefault(f =>
+            f.ID == this._currentItem.DamageFormula
+        );
 
         if (damageFormula == null)
         {
@@ -187,7 +214,10 @@ public partial class EquipmentPanel : UserControl
         }
         else
         {
-            this.ComboDamageFormula.SelectedIndex = Array.IndexOf(DamageFormula.DamageFormulas, damageFormula);
+            this.ComboDamageFormula.SelectedIndex = Array.IndexOf(
+                DamageFormula.DamageFormulas,
+                damageFormula
+            );
         }
 
         this.TextAttackPower.Text = this._currentItem.AttackPower.ToString();
@@ -260,7 +290,10 @@ public partial class EquipmentPanel : UserControl
             }
         }
 
-        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.AbilityCount));
+        var offset =
+            Equipment.Offset
+            + (this._selectedItem * Equipment.BlockLength)
+            + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.AbilityCount));
         GameMemory.Write(offset, (byte)newSlots, false);
 
         this.RefreshSelectedItem();
@@ -353,7 +386,10 @@ public partial class EquipmentPanel : UserControl
             return;
         }
 
-        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Character));
+        var offset =
+            Equipment.Offset
+            + (this._selectedItem * Equipment.BlockLength)
+            + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Character));
         GameMemory.Write(offset, (byte)this.ComboEquipmentCharacter.SelectedIndex, false);
 
         this.RefreshSelectedItem();
@@ -366,7 +402,10 @@ public partial class EquipmentPanel : UserControl
             return;
         }
 
-        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Type));
+        var offset =
+            Equipment.Offset
+            + (this._selectedItem * Equipment.BlockLength)
+            + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Type));
         GameMemory.Write(offset, (byte)this.ComboEquipmentType.SelectedIndex, false);
 
         this.RefreshSelectedItem();
@@ -385,7 +424,8 @@ public partial class EquipmentPanel : UserControl
         for (var n = 0; n < EquipAppearance.EquipAppearances.Length; n++)
         {
             searchList.Add(
-                $"{EquipAppearance.EquipAppearances[n].ID:X2} {EquipAppearance.EquipAppearances[n].Name}");
+                $"{EquipAppearance.EquipAppearances[n].ID:X2} {EquipAppearance.EquipAppearances[n].Name}"
+            );
         }
 
         var currentAppearance = this._currentItem.Appearance;
@@ -401,7 +441,10 @@ public partial class EquipmentPanel : UserControl
         var searchIndex = searchDialog.ResultIndex;
         var searchItem = EquipAppearance.EquipAppearances[searchIndex];
 
-        var offset = Equipment.Offset + (this._selectedItem * Equipment.BlockLength) + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Appearance));
+        var offset =
+            Equipment.Offset
+            + (this._selectedItem * Equipment.BlockLength)
+            + (int)Marshal.OffsetOf<EquipmentItem>(nameof(EquipmentItem.Appearance));
         GameMemory.Write(offset, (ushort)searchItem.ID, false);
 
         this.RefreshSelectedItem();
@@ -425,10 +468,12 @@ public partial class EquipmentPanel : UserControl
             nameString = "This item";
         }
 
-        var confirm =
-            MessageBox.Show(
-                $"{nameString} will be permanently deleted!\n\nAre you sure?",
-                "Confirm item deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        var confirm = MessageBox.Show(
+            $"{nameString} will be permanently deleted!\n\nAre you sure?",
+            "Confirm item deletion",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning
+        );
         if (confirm != MessageBoxResult.Yes)
         {
             return;
@@ -451,7 +496,7 @@ public partial class EquipmentPanel : UserControl
             DamageFormula = 0x01,
             AttackPower = 15,
             Critical = 3,
-            EquippedBy = 0xFF
+            EquippedBy = 0xFF,
         };
         Equipment.WriteItem(this._selectedItem, itemEmpty);
         this.RefreshSelectedItem();

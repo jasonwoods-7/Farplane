@@ -16,11 +16,17 @@ public partial class SearchDialog : MetroWindow
 
     public int ResultIndex = -1;
 
-    public SearchDialog(List<string> searchList, string defaultSearch = "", bool showNoSelection = true)
+    public SearchDialog(
+        List<string> searchList,
+        string defaultSearch = "",
+        bool showNoSelection = true
+    )
     {
         this.InitializeComponent();
 
-        this.ButtonClearSlot.Visibility = showNoSelection ? Visibility.Visible : Visibility.Collapsed;
+        this.ButtonClearSlot.Visibility = showNoSelection
+            ? Visibility.Visible
+            : Visibility.Collapsed;
 
         this._searchList = searchList;
 
@@ -85,10 +91,10 @@ public partial class SearchDialog : MetroWindow
             default:
                 return;
         }
-
     }
 
-    void ButtonSelectedCommand_OnClick(object sender, RoutedEventArgs e) => this.TryCloseAndReturn();
+    void ButtonSelectedCommand_OnClick(object sender, RoutedEventArgs e) =>
+        this.TryCloseAndReturn();
 
     void TryCloseAndReturn()
     {
@@ -109,7 +115,8 @@ public partial class SearchDialog : MetroWindow
         this.Close();
     }
 
-    void ListCommandSearch_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) => this.TryCloseAndReturn();
+    void ListCommandSearch_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) =>
+        this.TryCloseAndReturn();
 
     void ButtonClearSlot_Click(object sender, RoutedEventArgs e)
     {
